@@ -1,0 +1,21 @@
+@baseUrl = http://localhost:8000/api
+
+###
+get {{baseUrl}}/users
+
+###
+post {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "user": {
+    "email": "tony@daniels.com",
+    "password": "b0BBy"
+  }
+}
+
+###
+get {{baseUrl}}/users/64c77299cdafad688b23165e
+
+###
+delete {{baseUrl}}/users/64c77299cdafad688b23165e
