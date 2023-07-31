@@ -11,3 +11,6 @@ mongoose
     console.log("Connected to MongoDB");
   })
   .catch((err) => console.log("Error connectinf to MongoDB:", err));
+
+export default mongoose.connection;
+

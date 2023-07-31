@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
-    "dev": "npx tsc -w & nodemon dist/app.mjs"
+    "dev": "npx tsc -w & nodemon dist/app.mjs",
+    "seed": "node dist/db/seed/seed.mjs"
   },
   "keywords": [],
   "author": "",
