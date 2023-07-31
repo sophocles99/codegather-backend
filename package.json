@@ -1,0 +1,26 @@
+{
+  "name": "codegather-backend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "dev": "npx tsc -w & nodemon dist/app.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.4.5",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.1"
+  }
+}
