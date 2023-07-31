@@ -1,5 +1,5 @@
 import db from "../connection.mjs";
-import usersData from "../data/developement/usersData.js";
+import usersData from "../data/developement/usersData.mjs";
 import { UserModel } from "../../models/users.model.mjs";
 
 db.dropCollection('users');
