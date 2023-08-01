@@ -8,8 +8,13 @@ const getUsers = (req: Request, res: Response) =>
     })
     .catch((err) => {
       console.log(err);
-      res.sendStatus(400);
-    })
+      res
+        .status(400)
+        .json({
+          "mongoDB connection string": process.env.MONGO_URI,
+          error: err,
+        });
+    });
 
 const getUserById = (req: Request, res: Response) => {
   const { id } = req.params;
@@ -19,8 +24,8 @@ const getUserById = (req: Request, res: Response) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(400).json({"mongoDB connection string": process.env.MONGO_URI, "error": err });
-    })
+      res.sendStatus(400);
+    });
 };
 
 const postUser = (req: Request, res: Response) => {
@@ -32,7 +37,7 @@ const postUser = (req: Request, res: Response) => {
     .catch((err) => {
       console.log(err);
       res.sendStatus(400);
-    })
+    });
 };
 
 const deleteUserById = (req: Request, res: Response) => {
