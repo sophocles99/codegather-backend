@@ -7,6 +7,7 @@ import {
 } from "../data/developement/index.mjs";
 import { UserModel } from "../../models/users.model.mjs";
 import { EventModel } from "../../models/events.model.mjs";
+import { ProfileModel } from "../../models/profiles.model.mjs";
 
 interface IEvent {
   user_id?: ObjectId;
@@ -26,17 +27,35 @@ db.dropCollection("users")
     return db.dropCollection("events");
   })
   .then(() => {
+    return db.dropCollection("profiles");
+  })
+  .then(() => {
     return UserModel.insertMany(usersData);
   })
   .then((data) => {
     console.log("Users collection created");
-    eventsData.forEach((eventObj) => {
+    const modifiedEvents = eventsData.map((eventObj) => {
+      const newEventObj = { ...eventObj };
       const userIdIndex = Math.floor(Math.random() * data.length);
-      eventObj.user_id = data[userIdIndex]._id;
-      const event = EventModel(eventObj);
-      event.save();
+      newEventObj.user_id = data[userIdIndex]._id;
+      return newEventObj;
     });
+    const modifiedProfiles = profilesData.map((profileObj) => {
+      const newProfileObj = { ...profileObj };
+      const userIdIndex = Math.floor(Math.random() * data.length);
+      newProfileObj.user_id = data[userIdIndex]._id;
+      return newProfileObj;
+    });
+    return Promise.all([
+      EventModel.insertMany(modifiedEvents),
+      ProfileModel.insertMany(modifiedProfiles),
+    ]);
+  })
+  .then(() => {
+    console.log("Events collection created");
+    console.log("Profiles collection created");
+    db.close();
   })
   .catch((e) => {
-    console.log(e);
+    console.log(e.message);
   });

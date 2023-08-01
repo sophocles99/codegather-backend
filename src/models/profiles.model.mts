@@ -9,7 +9,7 @@ interface IProfile {
     gender: string,
     event_title: string,
     avatar: string,
-    location: number[],
+    location: string,
     date_of_birth: Date,
     coding_languages: string[],
     interests: string,
@@ -23,7 +23,7 @@ const ProfileSchema = new mongoose.Schema<IProfile>({
     gender: { type: String, required: false },
     event_title: { type: String, required: true },
     avatar: { type: String, required: false },
-    location: { type: Array(2), required: true }, //This can be co-ordinates or a string.
+    location: { type: String, required: true }, //This can be co-ordinates or a string.
     date_of_birth: { type: Date, required: true },
     coding_languages: { type: Array(), required: false },
     interests: { type: String, required: false },
