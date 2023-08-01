@@ -1,7 +1,8 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, ObjectId } from "mongoose";
+import { UserModel } from "./users.model.mjs";
 
 interface IEvent {
-    user_id: string,
+    user_id: ObjectId,
     event_title: string,
     image: string,
     location: number[],
@@ -14,16 +15,16 @@ interface IEvent {
 }
 
 const EventSchema = new Schema<IEvent>({
-    user_id: { type: String, required: true },
+    user_id: { type: Schema.ObjectId, ref: UserModel, required: false },
     event_title: { type: String, required: true },
     image: { type: String, required: false },
     location: { type: [Number, Number], required: true }, //This can be co-ordinates or a string.
     date_time: { type: Date, required: true },
     attending: { type: [String], required: false }, // [{profiles}]
-    topics: { type: [], required: false }, //[string, string...]
+    topics: { type: Array(), required: false }, //[string, string...]
     description: { type: String, required: false },
     size_limit: { type: Number, required: true },
-    participation_group: { type: [], required: false },
+    participation_group: { type: Array(), required: false },
 });
 
 export const EventModel = model("Event", EventSchema);
