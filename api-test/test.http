@@ -19,3 +19,6 @@ get {{baseUrl}}/users/64c7fd1318a27b88ecedcf8d
 
 ###
 delete {{baseUrl}}/users/64c77299cdafad688b23165e
+
+###
+get {{baseUrl}}/events
