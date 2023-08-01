@@ -19,7 +19,7 @@ const getUserById = (req: Request, res: Response) => {
     })
     .catch((err) => {
       console.log(err);
-      res.sendStatus(400);
+      res.status(400).json({"mongoDB connection string": process.env.MONGO_URI, "error": err });
     })
 };
 
