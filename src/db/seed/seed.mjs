@@ -9,18 +9,18 @@ import { UserModel } from "../../models/users.model.mjs";
 import { EventModel } from "../../models/events.model.mjs";
 import { ProfileModel } from "../../models/profiles.model.mjs";
 
-interface IEvent {
-  user_id?: ObjectId;
-  event_title: string;
-  image: string;
-  location: number[];
-  date_time: Date;
-  attending: ObjectId[];
-  topics: string[];
-  description: string;
-  size_limit: number;
-  participation_group: string[];
-}
+// interface IEvent {
+//   user_id?: ObjectId;
+//   event_title: string;
+//   image: string;
+//   location: number[];
+//   date_time: Date;
+//   attending: ObjectId[];
+//   topics: string[];
+//   description: string;
+//   size_limit: number;
+//   participation_group: string[];
+// }
 
 db.dropCollection("users")
   .then(() => {
