@@ -8,7 +8,7 @@ post {{baseUrl}}/users
 Content-Type: application/json
 
 {
-  "user": {
+  "createUser": {
     "email": "danny@daniels.com",
     "password": "t00nie",
     "first_name": "Tony",

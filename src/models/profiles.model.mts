@@ -25,7 +25,7 @@ const ProfileSchema = new mongoose.Schema<IProfile>({
     date_of_birth: { type: Date, required: true },
     coding_languages: { type: Array(), required: false },
     interests: { type: String, required: false },
-    host_ratings: { type: Number, required: true }
+    host_ratings: { type: Number, default: null }
 });
 
 export const ProfileModel = mongoose.model('Profile', ProfileSchema);

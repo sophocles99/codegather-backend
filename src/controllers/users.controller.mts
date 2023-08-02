@@ -33,11 +33,9 @@ const loginUser = (req: Request, res: Response) => {
   UserModel.findOne({ email })
     .then((user) => {
       if (!user) {
-        console.log(`User with email ${email} not found`);
         return res.status(401).send({ success: false, user_id: null });
       }
       if (user.password === password) {
-        console.log(`User successfully logged in`);
         res.status(200).json({ success: true, user_id: user._id });
       } else {
         res.status(401).send({ success: false, user_id: null });
@@ -49,32 +47,12 @@ const loginUser = (req: Request, res: Response) => {
     });
 };
 
-const getUsers = (req: Request, res: Response) =>
-  UserModel.find()
-    .then((data: IReturnedUsers[]) => {
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(400);
-    });
-
-const getUserById = (req: Request, res: Response) => {
-  const { id } = req.params;
-  UserModel.findById(id)
-    .then((data) => {
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(400);
-    });
-};
-
-const postUser = (req: Request, res: Response) => {
+const createUser = (req: Request, res: Response) => {
   const { user } = req.body;
-  const { email, password } = user;
+  console.log(user)
   const {
+    email,
+    password,
     first_name,
     last_name,
     username,
@@ -115,6 +93,28 @@ const postUser = (req: Request, res: Response) => {
     });
 };
 
+const getUsers = (req: Request, res: Response) =>
+  UserModel.find()
+    .then((users: IReturnedUsers[]) => {
+      res.status(200).send({ users });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(400);
+    });
+
+const getUserById = (req: Request, res: Response) => {
+  const { id } = req.params;
+  UserModel.findById(id)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(400);
+    });
+};
+
 const deleteUserById = (req: Request, res: Response) => {
   const { id } = req.params;
   UserModel.findOneAndDelete({ _id: id })
@@ -127,4 +127,4 @@ const deleteUserById = (req: Request, res: Response) => {
     });
 };
 
-export { loginUser, getUsers, getUserById, postUser, deleteUserById };
+export { loginUser, createUser, getUsers, getUserById, deleteUserById };
