@@ -8,7 +8,7 @@ export default [
     avatar: "https://robohash.org/quisexpeditaimpedit.png?size=50x50&set=set1",
     location: "Visoko",
     date_of_birth: "2023-04-18",
-    coding_language: "French",
+    coding_languages: ["JavaScript"],
     interests:
       "est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu",
     host_ratings: 0,
@@ -22,7 +22,7 @@ export default [
     avatar: "https://robohash.org/nonprovidentquia.png?size=50x50&set=set1",
     location: "Kebloran",
     date_of_birth: "2023-07-26",
-    coding_language: "Swahili",
+    coding_languages: ["Python", "Java"],
     interests:
       "cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel",
     host_ratings: 0,
@@ -36,7 +36,7 @@ export default [
     avatar: "https://robohash.org/fugitadharum.png?size=50x50&set=set1",
     location: "Neklyudovo",
     date_of_birth: "2023-05-25",
-    coding_language: "Thai",
+    coding_languages: ["C++"],
     interests:
       "quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh",
     host_ratings: 1,
@@ -51,7 +51,7 @@ export default [
       "https://robohash.org/pariaturaliasreiciendis.png?size=50x50&set=set1",
     location: "Salekhard",
     date_of_birth: "2023-04-09",
-    coding_language: "Persian",
+    coding_languages: ["Rust", "Go"],
     interests:
       "blandit nam nulla integer pede justo lacinia eget tincidunt eget",
     host_ratings: 2,
@@ -65,7 +65,7 @@ export default [
     avatar: "https://robohash.org/etmodidolorem.png?size=50x50&set=set1",
     location: "Siaya",
     date_of_birth: "2023-05-23",
-    coding_language: "Hindi",
+    coding_languages: ["Haskell", "Scala", "TypeScript"],
     interests:
       "tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec",
     host_ratings: 0,
@@ -79,7 +79,7 @@ export default [
     avatar: "https://robohash.org/liberonostrumdolores.png?size=50x50&set=set1",
     location: "Altagracia de Orituco",
     date_of_birth: "2022-08-09",
-    coding_language: "Sotho",
+    coding_languages: ["Ruby", "PHP"],
     interests:
       "quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut",
     host_ratings: 5,
@@ -93,7 +93,7 @@ export default [
     avatar: "https://robohash.org/maximetemporaquasi.png?size=50x50&set=set1",
     location: "Pakel",
     date_of_birth: "2023-05-05",
-    coding_language: "Croatian",
+    coding_languages: ["Swift", "Kotlin", "Objective-C"],
     interests:
       "mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque",
     host_ratings: 1,
@@ -107,7 +107,7 @@ export default [
     avatar: "https://robohash.org/rationequodaliquid.png?size=50x50&set=set1",
     location: "Chagoda",
     date_of_birth: "2022-09-02",
-    coding_language: "Indonesian",
+    coding_languages: ["Perl", "Bash"],
     interests:
       "duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit",
     host_ratings: 1,
@@ -121,7 +121,7 @@ export default [
     avatar: "https://robohash.org/natusomnisiusto.png?size=50x50&set=set1",
     location: "La Poma",
     date_of_birth: "2023-07-05",
-    coding_language: "Gujarati",
+    coding_languages: ["JavaScript", "HTML", "CSS"],
     interests:
       "lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis",
     host_ratings: 0,
@@ -135,7 +135,7 @@ export default [
     avatar: "https://robohash.org/facilisquiaut.png?size=50x50&set=set1",
     location: "Bowen Island",
     date_of_birth: "2022-12-12",
-    coding_language: "Korean",
+    coding_languages: ["Java", "C#"],
     interests:
       "faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio",
     host_ratings: 5,
