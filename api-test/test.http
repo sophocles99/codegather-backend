@@ -9,8 +9,18 @@ Content-Type: application/json
 
 {
   "user": {
-    "email": "tony@daniels.com",
-    "password": "b0BBy"
+    "email": "danny@daniels.com",
+    "password": "t00nie",
+    "first_name": "Tony",
+    "last_name": "Daniels",
+    "username": "tdog21",
+    "gender": "not sure",
+    "avatar": "",
+    "location": "London",
+    "date_of_birth": "1999-12-31",
+    "coding_languages": ["JavaScript", "TypeScript"],
+    "interests": "Kung-Fu Panda",
+    "host_ratings": 0
   }
 }
 
@@ -18,7 +28,7 @@ Content-Type: application/json
 get {{baseUrl}}/users/64c7fd1318a27b88ecedcf8d
 
 ###
-delete {{baseUrl}}/users/64c77299cdafad688b23165e
+delete {{baseUrl}}/users/64c9adf5aa6f73141d564189
 
 ###
 get {{baseUrl}}/events

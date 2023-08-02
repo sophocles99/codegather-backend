@@ -1,9 +1,36 @@
 import { Request, Response } from "express";
+import { Types } from "mongoose";
 import { UserModel } from "../models/users.model.mjs";
+import { ProfileModel } from "../models/profiles.model.mjs";
+
+interface INewUser {
+  email: string;
+  password: string;
+}
+
+interface INewProfile {
+  user_id?: Types.ObjectId;
+  first_name: string;
+  last_name: string;
+  username: string;
+  gender: string;
+  avatar: string;
+  location: string;
+  date_of_birth: string;
+  coding_languages: string[];
+  interests: string;
+  host_ratings: number;
+}
+
+interface IReturnedUsers {
+  _id: Types.ObjectId;
+  email: string;
+  password: string;
+}
 
 const getUsers = (req: Request, res: Response) =>
   UserModel.find()
-    .then((data) => {
+    .then((data: IReturnedUsers[]) => {
       res.status(200).json(data);
     })
     .catch((err) => {
@@ -25,9 +52,41 @@ const getUserById = (req: Request, res: Response) => {
 
 const postUser = (req: Request, res: Response) => {
   const { user } = req.body;
-  UserModel.create(user)
+  const { email, password } = user;
+  const {
+    first_name,
+    last_name,
+    username,
+    gender,
+    avatar,
+    location,
+    date_of_birth,
+    coding_languages,
+    interests,
+    host_ratings,
+  } = user;
+  const newUser: INewUser = { email, password };
+  const newProfile: INewProfile = {
+    first_name,
+    last_name,
+    username,
+    gender,
+    avatar,
+    location,
+    date_of_birth,
+    coding_languages,
+    interests,
+    host_ratings,
+  };
+  let returnedUser = {}
+  UserModel.create(newUser)
     .then((data) => {
-      res.status(200).json(data);
+      returnedUser = data
+      newProfile.user_id = data._id;
+      ProfileModel.create(newProfile).then((data) => {
+        const returnedProfile = data
+        res.status(200).json({returnedUser, returnedProfile});
+      });
     })
     .catch((err) => {
       console.log(err);

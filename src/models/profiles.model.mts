@@ -7,7 +7,6 @@ interface IProfile {
     last_name: string,
     username: string,
     gender: string,
-    event_title: string,
     avatar: string,
     location: string,
     date_of_birth: Date,
@@ -21,7 +20,6 @@ const ProfileSchema = new mongoose.Schema<IProfile>({
     last_name: { type: String, required: true },
     username: { type: String, required: true },
     gender: { type: String, required: false },
-    event_title: { type: String, required: true },
     avatar: { type: String, required: false },
     location: { type: String, required: true }, //This can be co-ordinates or a string.
     date_of_birth: { type: Date, required: true },
