@@ -35,12 +35,13 @@ const loginUser = (req: Request, res: Response) => {
   UserModel.findOne({ email }).then((user) => {
     if (!user) {
       console.log(`User with email ${email} not found`);
-      res.status(400).json({ login: { success: false, user: undefined } });
+      return res.status(400).json({ login: { success: false, user: undefined } });
     }
     if (user.password === password) {
       console.log(`User successfully logged in`);
       res.status(201).json({ login: { success: true, user } });
     }
+
   }).catch((err) => {
     console.log(err);
     res.sendStatus(400);

@@ -40,7 +40,26 @@ describe("POST /api/users/login", () => {
         expect(login.user).toHaveProperty("password", "cI6#}6hO2S.")
       });
   });
+
+  test("responds with 400 and login Success:false.", () => {
+    const testLogin = {
+      login: {
+        email: "shosier1@liveinternet.rx",
+        password: "cI6#}6hO2S6.",
+      },
+    };
+    return request(app)
+      .post("/api/users/login")
+      .send(testLogin)
+      .expect(400)
+      .then(({ body }) => {
+        const { login } = body;
+        expect(login).toHaveProperty("success", false)
+        expect(login).toHaveProperty("user", undefined);
+      });
+  });
 });
+
 
 // Body:
 
