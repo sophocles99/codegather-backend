@@ -33,10 +33,24 @@ describe("POST /api/users/login", () => {
         expect(body).toHaveProperty("user_id", expect.any(String));
       });
   });
-  test("401: for invalid credentials, responds with {success: false, user_id: null}", () => {
+  test("401: for invalid email, responds with {success: false, user_id: null}", () => {
     const testLogin = {
       email: "shosier1@liveinternet.rX",
       password: "cI6#}6hO2S.",
+    };
+    return request(app)
+      .post("/api/users/login")
+      .send(testLogin)
+      .expect(401)
+      .then(({ body }) => {
+        expect(body).toHaveProperty("success", false);
+        expect(body).toHaveProperty("user_id", null);
+      });
+  });
+  test("401: for valid email but invalid password, responds with {success: false, user_id: null}", () => {
+    const testLogin = {
+      email: "shosier1@liveinternet.ru",
+      password: "cI6#}6hOOOOOOO",
     };
     return request(app)
       .post("/api/users/login")

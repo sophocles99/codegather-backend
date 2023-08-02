@@ -39,6 +39,8 @@ const loginUser = (req: Request, res: Response) => {
       if (user.password === password) {
         console.log(`User successfully logged in`);
         res.status(200).json({ success: true, user_id: user._id });
+      } else {
+        res.status(401).send({ success: false, user_id: null });
       }
     })
     .catch((err) => {
