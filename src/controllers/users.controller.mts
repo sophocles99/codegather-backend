@@ -29,17 +29,16 @@ interface IReturnedUsers {
 }
 
 const loginUser = (req: Request, res: Response) => {
-  const { login } = req.body;
-  const { email, password } = login;
+  const { email, password } = req.body;
   UserModel.findOne({ email })
     .then((user) => {
       if (!user) {
         console.log(`User with email ${email} not found`);
-        return res.status(401).json({ login: { success: false, user: null } });
+        return res.status(401).send({ success: false, user_id: null });
       }
       if (user.password === password) {
         console.log(`User successfully logged in`);
-        res.status(200).json({ login: { success: true, user } });
+        res.status(200).json({ success: true, user_id: user._id });
       }
     })
     .catch((err) => {
