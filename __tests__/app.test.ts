@@ -21,7 +21,7 @@ describe("GET /api/users", () => {
 })
 
 describe("POST /api/users/login", () => {
-  test("responds with object specifying whether user is logged in, and if so returns user object", () => {
+  test("200: for valid credentials, responds with login object {success: true, user: user}", () => {
     const testLogin = {
       login: {
         email: "shosier1@liveinternet.ru",
@@ -31,17 +31,16 @@ describe("POST /api/users/login", () => {
     return request(app)
       .post("/api/users/login")
       .send(testLogin)
-      .expect(201)
+      .expect(200)
       .then(({ body }) => {
         const { login } = body;
         expect(login).toHaveProperty("success", true)
-        expect(login.user).toHaveProperty("_id")
+        expect(login.user).toHaveProperty("_id", expect.any(String))
         expect(login.user).toHaveProperty("email", "shosier1@liveinternet.ru")
         expect(login.user).toHaveProperty("password", "cI6#}6hO2S.")
       });
   });
-
-  test("responds with 400 and login Success:false.", () => {
+  test("401: for invalid credentials, responds with login object {success: false, user: null}", () => {
     const testLogin = {
       login: {
         email: "shosier1@liveinternet.rx",
@@ -51,33 +50,12 @@ describe("POST /api/users/login", () => {
     return request(app)
       .post("/api/users/login")
       .send(testLogin)
-      .expect(400)
+      .expect(401)
       .then(({ body }) => {
         const { login } = body;
         expect(login).toHaveProperty("success", false)
-        expect(login).toHaveProperty("user", undefined);
+        expect(login).toHaveProperty("user", null);
       });
   });
 });
 
-
-// Body:
-
-// { email:…, password }
-
-// Return value:
-
-// { login: {
-//   success: true,
-//   user: {
-//     _id: asdfasdfasdf,
-//     email: "shosier1@liveinternet.ru",
-//     password: "cI6#}6hO2S."
-//   }
-// }}
-
-// status code 201, {login: {success: true, msg: “..”, user}}
-
-// or
-
-// status code 400, {success: false, msg: “..”, undefined}
