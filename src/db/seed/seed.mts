@@ -28,7 +28,6 @@ interface INewProfile {
   last_name: string;
   username: string;
   gender: string;
-  event_title: string;
   avatar: string;
   location: string;
   date_of_birth: string;
