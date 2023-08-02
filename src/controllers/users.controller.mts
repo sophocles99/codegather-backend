@@ -28,6 +28,25 @@ interface IReturnedUsers {
   password: string;
 }
 
+const loginUser = (req: Request, res: Response) => {
+  console.log("<--------- controller")
+  const { login } = req.body;
+  const { email, password } = login;
+  UserModel.findOne({ email }).then((user) => {
+    if (!user) {
+      console.log(`User with email ${email} not found`);
+      res.status(400).json({ login: { success: false, user: undefined } });
+    }
+    if (user.password === password) {
+      console.log(`User successfully logged in`);
+      res.status(201).json({ login: { success: true, user } });
+    }
+  }).catch((err) => {
+    console.log(err);
+    res.sendStatus(400);
+  });
+};
+
 const getUsers = (req: Request, res: Response) =>
   UserModel.find()
     .then((data: IReturnedUsers[]) => {
@@ -78,14 +97,14 @@ const postUser = (req: Request, res: Response) => {
     interests,
     host_ratings,
   };
-  let returnedUser = {}
+  let returnedUser = {};
   UserModel.create(newUser)
     .then((data) => {
-      returnedUser = data
+      returnedUser = data;
       newProfile.user_id = data._id;
       ProfileModel.create(newProfile).then((data) => {
-        const returnedProfile = data
-        res.status(200).json({returnedUser, returnedProfile});
+        const returnedProfile = data;
+        res.status(200).json({ returnedUser, returnedProfile });
       });
     })
     .catch((err) => {
@@ -106,4 +125,4 @@ const deleteUserById = (req: Request, res: Response) => {
     });
 };
 
-export { getUsers, getUserById, postUser, deleteUserById };
+export { loginUser, getUsers, getUserById, postUser, deleteUserById };
