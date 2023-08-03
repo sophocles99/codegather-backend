@@ -36,40 +36,46 @@ interface INewProfile {
   host_ratings: number;
 }
 
-db.dropCollection("users")
-  .then(() => {
-    return db.dropCollection("events");
-  })
-  .then(() => {
-    return db.dropCollection("profiles");
-  })
-  .then(() => {
-    return UserModel.insertMany(usersData);
-  })
-  .then((data) => {
-    console.log("Users collection created");
-    const modifiedProfiles = profilesData.map((profile) => {
-      const newProfile: INewProfile = { ...profile };
-      const userIdIndex = Math.floor(Math.random() * data.length);
-      newProfile.user_id = data[userIdIndex]._id;
-      return newProfile;
+const seed = () => {
+  db.dropCollection("users")
+    .then(() => {
+      return db.dropCollection("events");
+    })
+    .then(() => {
+      return db.dropCollection("profiles");
+    })
+    .then(() => {
+      return UserModel.insertMany(usersData);
+    })
+    .then((data) => {
+      console.log("Users collection created");
+      const modifiedProfiles = profilesData.map((profile) => {
+        const newProfile: INewProfile = { ...profile };
+        const userIdIndex = Math.floor(Math.random() * data.length);
+        newProfile.user_id = data[userIdIndex]._id;
+        return newProfile;
+      });
+      const modifiedEvents = eventsData.map((event) => {
+        const newEvent: INewEvent = { ...event };
+        const userIdIndex = Math.floor(Math.random() * data.length);
+        newEvent.user_id = data[userIdIndex]._id;
+        return newEvent;
+      });
+      return Promise.all([
+        ProfileModel.insertMany(modifiedProfiles),
+        EventModel.insertMany(modifiedEvents),
+      ]);
+    })
+    .then(() => {
+      console.log("Profiles collection created");
+      console.log("Events collection created");
+      db.close();
+    })
+    .catch((e) => {
+      console.log(e.message);
     });
-    const modifiedEvents = eventsData.map((event) => {
-      const newEvent: INewEvent = { ...event };
-      const userIdIndex = Math.floor(Math.random() * data.length);
-      newEvent.user_id = data[userIdIndex]._id;
-      return newEvent;
-    });
-    return Promise.all([
-      ProfileModel.insertMany(modifiedProfiles),
-      EventModel.insertMany(modifiedEvents),
-    ]);
-  })
-  .then(() => {
-    console.log("Profiles collection created");
-    console.log("Events collection created");
-    db.close();
-  })
-  .catch((e) => {
-    console.log(e.message);
-  });
+};
+
+seed();
+
+export default seed;
