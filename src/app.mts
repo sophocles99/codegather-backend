@@ -2,6 +2,7 @@ import cors from "cors";
 import express, { Express, Request, Response } from "express";
 import "./db/connection.mjs";
 import { apiRouter } from "./routes/api.router.mjs";
+import { noRouteFound } from "./controllers/events.controller.mjs";
 
 const app: Express = express();
 
@@ -14,5 +15,7 @@ app.use("/api", apiRouter)
 app.get("/", (req: Request, res: Response)=> {
   res.status(200).send("Hello from the CodeGather server")
 })
+
+app.all('*', noRouteFound)
 
 export default app

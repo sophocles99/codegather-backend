@@ -32,3 +32,6 @@ delete {{baseUrl}}/users/64c9adf5aa6f73141d564189
 
 ###
 get {{baseUrl}}/events
+
+###
+get {{baseUrl}}/events/64cbb370c05f6e09e39b6363
