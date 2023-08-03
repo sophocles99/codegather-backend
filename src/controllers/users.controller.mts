@@ -36,7 +36,7 @@ const loginUser = (req: Request, res: Response) => {
         return res.status(401).send({ success: false, user_id: null });
       }
       if (user.password === password) {
-        res.status(200).json({ success: true, user_id: user._id });
+        res.status(200).send({ success: true, user_id: user._id });
       } else {
         res.status(401).send({ success: false, user_id: null });
       }

@@ -112,3 +112,9 @@ describe("POST /api/users/createuser", () => {
       });
   });
 });
+
+describe("GET /api/events", ()=> {
+  test("200: returns all events", ()=>{
+    
+  })
+})
