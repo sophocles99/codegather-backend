@@ -13,13 +13,13 @@ const getEvents = (req: Request, res: Response) =>
 
 const getEventById = (req: Request, res: Response) => {
   const { id } = req.params;
-  EventModel.findById( id )
-    .then((event) => {
-      res.status(200).send({event});
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(400);
+  EventModel.findById( id.toString() )
+  .then((event) => {
+    res.status(200).send({event});
+  })
+  .catch((err) => {
+    console.log('Inside catch of getEventById');
+    res.status(404).send({msg:"Not Found"});
     })
 };
 
@@ -48,8 +48,7 @@ const deleteEventById = (req: Request, res: Response) => {
 };
 
 const noRouteFound = (req: Request, res: Response) => {
-  console.log('no route found');
-  res.status(404).send({msg: "Not found"});
+  res.status(400).send({msg: "Bad Request"});
 }
 
 export { getEvents, getEventById, postEvent, deleteEventById, noRouteFound };

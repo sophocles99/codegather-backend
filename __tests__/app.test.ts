@@ -7,7 +7,7 @@ afterAll(() => {
 });
 
 describe("GET /", () => {
-  test("return message from server", () => {
+  test("200: returns message from server", () => {
     return request(app)
       .get("/")
       .expect(200)
@@ -17,15 +17,15 @@ describe("GET /", () => {
   });
 });
 
-describe("return 404 for invalid endpoint", () => {
-  test("return 404 for invalid endpoint", () => {
-    return request(app).get("/api/notanendpoint").expect(404).then(({body})=>
-    expect(body.msg).toBe("Not found"));
-  });
-});
+// describe("Invalid Endpoint", () => {
+//   test("404: Invalid endpoint", () => {
+//     return request(app).get("/api/notanendpoint").expect(404).then(({body})=>
+//     expect(body.msg).toBe("Not found"));
+//   });
+// });
 
 describe("GET /api/users", () => {
-  test("gets all users", () => {
+  test("200: GET all users", () => {
     return request(app)
       .get("/api/users")
       .expect(200)
@@ -169,7 +169,7 @@ describe("POST /api/users/createuser", () => {
 
 //Events testing...
 describe("GET /api/events", () => {
-  test("get all events.", () => {
+  test("200: GET all events.", () => {
     interface IEvent {
       _id: String;
       user_id?: string;
@@ -210,8 +210,8 @@ describe("GET /api/events", () => {
 // To pass this test, change xdescribe to describe.only, removing seeding
 // command from package.json "test" script, and paste real event_id into
 // the get request in the test
-xdescribe("GET /api/events/:event_id", () => {
-  test("200: responds with JSON object of all events for a given event_id.", () => {
+describe("GET /api/events/:event_id", () => {
+  xtest("200: responds with JSON object of all events for a given event_id.", () => {
     return request(app)
       .get("/api/events/64cbb370c05f6e09e39b6363")
       .expect(200)
@@ -230,12 +230,23 @@ xdescribe("GET /api/events/:event_id", () => {
         expect(event).toHaveProperty("participation_group", expect.any(Array));
       });
   });
-  test("404: responds with empty JSON object.", () => {
+  test("404: responds with an error message if passed an invalid ID.", () => {
     return request(app)
       .get("/api/events/1500")
       .expect(404)
       .then(({ body }) => {
         expect(body.msg).toEqual("Not Found");
+      });
+  });
+});
+
+describe("Invalid Endpoint", () => {
+  test("400: responds with an error message if searched with a wrong url. URL: /api/events...", () => {
+    return request(app)
+      .get("/api/even")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toEqual("Bad Request");
       });
   });
 });
