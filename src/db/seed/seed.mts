@@ -13,13 +13,12 @@ interface INewEvent {
   user_id?: Types.ObjectId; //mongoose.Types.ObjectId - different from Schema.Types.ObjectId
   event_title: string;
   image: string;
-  location: number[];
+  location: { lat: number; long: number };
   date_time: string; // will be cast to Date type in database
   attending: Types.ObjectId[];
-  topics: string;
+  topics: string[];
   description: string;
   size_limit: number;
-  participation_group: string;
 }
 
 interface INewProfile {
@@ -38,7 +37,8 @@ interface INewProfile {
 
 const seed = () => {
   console.log("Seeding database...");
-  return db.dropCollection("users")
+  return db
+    .dropCollection("users")
     .then(() => {
       return db.dropCollection("events");
     })

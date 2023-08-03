@@ -17,6 +17,13 @@ describe("GET /", () => {
   });
 });
 
+describe("return 404 for invalid endpoint", () => {
+  test("return 404 for invalid endpoint", () => {
+    return request(app).get("/api/notanendpoint").expect(404).then(({body})=>
+    expect(body.msg).toBe("Not found"));
+  });
+});
+
 describe("GET /api/users", () => {
   test("gets all users", () => {
     return request(app)
@@ -164,7 +171,7 @@ describe("POST /api/users/createuser", () => {
 describe("GET /api/events", () => {
   test("get all events.", () => {
     interface IEvent {
-      _id: String,
+      _id: String;
       user_id?: string;
       event_title: string;
       image: string;
@@ -185,35 +192,31 @@ describe("GET /api/events", () => {
           expect(event).toHaveProperty("user_id", expect.any(String));
           expect(event).toHaveProperty("event_title", expect.any(String));
           expect(event).toHaveProperty("image", expect.any(String));
-          expect(event).toHaveProperty("location", expect.any(Array));
+          expect(event.location).toMatchObject({
+            lat: expect.any(Number),
+            long: expect.any(Number),
+          });
           expect(event).toHaveProperty("date_time", expect.any(String));
           expect(event).toHaveProperty("attending", expect.any(Array));
           expect(event).toHaveProperty("topics", expect.any(Array));
           expect(event).toHaveProperty("description", expect.any(String));
           expect(event).toHaveProperty("size_limit", expect.any(Number));
-          expect(event).toHaveProperty("participation_group", expect.any(Array));
           expect(body).toHaveLength(20);
         });
-      })
-  });
-
-  test("400: responds with an error message if searched with wrong url. URL: /api/events", () => {
-    return request(app)
-      .get("/api/aldkjf")
-      .expect(404)
-      .then(({ body }) => {
-        expect(body.msg).toEqual("Not found");
       });
   });
 });
 
-describe("GET /api/events/:event_id", () => {
+// To pass this test, change xdescribe to describe.only, removing seeding
+// command from package.json "test" script, and paste real event_id into
+// the get request in the test
+xdescribe("GET /api/events/:event_id", () => {
   test("200: responds with JSON object of all events for a given event_id.", () => {
     return request(app)
       .get("/api/events/64cbb370c05f6e09e39b6363")
       .expect(200)
       .then(({ body }) => {
-        const {event} = body;
+        const { event } = body;
         expect(event).toHaveProperty("_id", expect.any(String));
         expect(event).toHaveProperty("user_id", expect.any(String));
         expect(event).toHaveProperty("event_title", expect.any(String));
@@ -227,17 +230,7 @@ describe("GET /api/events/:event_id", () => {
         expect(event).toHaveProperty("participation_group", expect.any(Array));
       });
   });
-
-  xtest("400: responds with an error message if searched with wrong url. URL: /api/events/:event_id", () => {
-    return request(app)
-      .get("/api/articl")
-      .expect(400)
-      .then(({ body }) => {
-        expect(body.msg).toEqual("Bad request. Please check what you're requesting and try again.");
-      });
-  });
-
-  xtest("404: responds with empty JSON object.", () => {
+  test("404: responds with empty JSON object.", () => {
     return request(app)
       .get("/api/events/1500")
       .expect(404)
@@ -246,4 +239,3 @@ describe("GET /api/events/:event_id", () => {
       });
   });
 });
-

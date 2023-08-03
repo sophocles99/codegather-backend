@@ -1,20 +1,202 @@
-export default [{"event_title":"well-modulated","image":"http://dummyimage.com/174x100.png/5fa2dd/ffffff","location":[44,7],"date_time":"9/27/2022","attending":[],"topics":"heuristic","description":"Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.","size_limit":87,"participation_group":"budgetary management"},
-{"event_title":"Mandatory","image":"http://dummyimage.com/152x100.png/ff4444/ffffff","location":[98,84],"date_time":"6/9/2023","attending":[],"topics":"multi-state","description":"Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","size_limit":77,"participation_group":"analyzer"},
-{"event_title":"database","image":"http://dummyimage.com/222x100.png/dddddd/000000","location":[38,29],"date_time":"3/4/2023","attending":[],"topics":"Enterprise-wide","description":"Nullam sit amet turpis elementum ligula vehicula consequat.","size_limit":12,"participation_group":"Fundamental"},
-{"event_title":"forecast","image":"http://dummyimage.com/134x100.png/ff4444/ffffff","location":[52,78],"date_time":"2/12/2023","attending":[],"topics":"Switchable","description":"Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.","size_limit":46,"participation_group":"capacity"},
-{"event_title":"Inverse","image":"http://dummyimage.com/228x100.png/5fa2dd/ffffff","location":[14,66],"date_time":"9/11/2022","attending":[],"topics":"Extended","description":"Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus.","size_limit":53,"participation_group":"knowledge base"},
-{"event_title":"User-centric","image":"http://dummyimage.com/199x100.png/dddddd/000000","location":[52,34],"date_time":"9/6/2022","attending":[],"topics":"functionalities","description":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus.","size_limit":1,"participation_group":"Proactive"},
-{"event_title":"Integrated","image":"http://dummyimage.com/138x100.png/cc0000/ffffff","location":[96,73],"date_time":"6/25/2023","attending":[],"topics":"mission-critical","description":"Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.","size_limit":62,"participation_group":"focus group"},
-{"event_title":"website","image":"http://dummyimage.com/113x100.png/dddddd/000000","location":[16,90],"date_time":"5/17/2023","attending":[],"topics":"discrete","description":"In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.","size_limit":48,"participation_group":"info-mediaries"},
-{"event_title":"Streamlined","image":"http://dummyimage.com/104x100.png/5fa2dd/ffffff","location":[92,91],"date_time":"10/22/2022","attending":[],"topics":"Operative","description":"Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.","size_limit":87,"participation_group":"Phased"},
-{"event_title":"Optional","image":"http://dummyimage.com/218x100.png/5fa2dd/ffffff","location":[54,2],"date_time":"2/13/2023","attending":[],"topics":"maximized","description":"Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.","size_limit":55,"participation_group":"incremental"},
-{"event_title":"matrix","image":"http://dummyimage.com/212x100.png/cc0000/ffffff","location":[39,32],"date_time":"1/3/2023","attending":[],"topics":"Ergonomic","description":"Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor.","size_limit":63,"participation_group":"Integrated"},
-{"event_title":"hybrid","image":"http://dummyimage.com/211x100.png/5fa2dd/ffffff","location":[81,7],"date_time":"9/26/2022","attending":[],"topics":"De-engineered","description":"Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.","size_limit":96,"participation_group":"multi-state"},
-{"event_title":"Reactive","image":"http://dummyimage.com/124x100.png/cc0000/ffffff","location":[52,95],"date_time":"4/9/2023","attending":[],"topics":"groupware","description":"In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula.","size_limit":64,"participation_group":"Networked"},
-{"event_title":"internet solution","image":"http://dummyimage.com/202x100.png/cc0000/ffffff","location":[41,5],"date_time":"3/21/2023","attending":[],"topics":"exuding","description":"Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.","size_limit":9,"participation_group":"Front-line"},
-{"event_title":"interface","image":"http://dummyimage.com/143x100.png/5fa2dd/ffffff","location":[47,64],"date_time":"10/11/2022","attending":[],"topics":"methodology","description":"Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.","size_limit":79,"participation_group":"Decentralized"},
-{"event_title":"heuristic","image":"http://dummyimage.com/158x100.png/cc0000/ffffff","location":[26,56],"date_time":"12/27/2022","attending":[],"topics":"Monitored","description":"Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.","size_limit":1,"participation_group":"Graphical User Interface"},
-{"event_title":"Front-line","image":"http://dummyimage.com/122x100.png/cc0000/ffffff","location":[44,96],"date_time":"5/30/2023","attending":[],"topics":"Graphical User Interface","description":"Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.","size_limit":31,"participation_group":"customer loyalty"},
-{"event_title":"Mandatory","image":"http://dummyimage.com/187x100.png/5fa2dd/ffffff","location":[20,72],"date_time":"5/12/2023","attending":[],"topics":"adapter","description":"Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.","size_limit":45,"participation_group":"methodical"},
-{"event_title":"next generation","image":"http://dummyimage.com/216x100.png/ff4444/ffffff","location":[3,81],"date_time":"6/25/2023","attending":[],"topics":"Digitized","description":"Ut at dolor quis odio consequat varius. Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.","size_limit":23,"participation_group":"Optimized"},
-{"event_title":"capacity","image":"http://dummyimage.com/157x100.png/cc0000/ffffff","location":[90,54],"date_time":"3/16/2023","attending":[],"topics":"composite","description":"Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.","size_limit":69,"participation_group":"demand-driven"}]
+export default [
+  {
+    "event_title": "TechXpo London",
+    "image": "https://solguruz.com/wp-content/uploads/2022/09/ReactJS-Framework-Benefits.png",
+    "location": { "lat": 51.5074, "long": -0.1278 },
+    "date_time": "2023-09-27T18:30:00Z",
+    "attending": [],
+    "topics": ["Web Development", "Artificial Intelligence"],
+    "description": "TechXpo London is a premier tech event showcasing the latest trends in web development and artificial intelligence. Join us for an exciting evening of insightful talks and networking opportunities.",
+    "size_limit": 85
+  },
+  {
+    "event_title": "CodeFest Manchester",
+    "image": "https://i.natgeofe.com/n/7fef9761-077c-45d0-9cca-78a984b9d614/burmese-python_thumb_4x3.jpg",
+    "location": { "lat": 53.483959, "long": -2.244644 },
+    "date_time": "2023-06-09T19:00:00Z",
+    "attending": [],
+    "topics": ["Mobile App Development", "Data Science"],
+    "description": "CodeFest Manchester is a must-attend event for mobile app developers and data science enthusiasts. Join us for an evening packed with hands-on workshops and engaging talks.",
+    "size_limit": 75
+  },
+  {
+    "event_title": "AI Summit Edinburgh",
+    "image": "https://miro.medium.com/v2/resize:fit:1200/1*BPSx-c--z6r7tY29L19ukQ.png",
+    "location": { "lat": 55.9533, "long": -3.1883 },
+    "date_time": "2023-03-04T18:00:00Z",
+    "attending": [],
+    "topics": ["Artificial Intelligence", "Machine Learning"],
+    "description": "AI Summit Edinburgh brings together experts in artificial intelligence and machine learning. Don't miss this evening event featuring cutting-edge research and industry insights.",
+    "size_limit": 70
+  },
+  {
+    "event_title": "Database Expo",
+    "image": "https://uswfoxtail.blob.core.windows.net/foxtail-prod-uploads/images/Thinks.8dd35e85.fill-1366x700.format-jpeg.jpegquality-80.jpg",
+    "location": { "lat": 55.8642, "long": -4.2518 },
+    "date_time": "2023-02-12T19:30:00Z",
+    "attending": [],
+    "topics": ["Database Management", "Big Data"],
+    "description": "Database Expo is the ultimate gathering for database enthusiasts. Explore the latest advances in database management and big data analytics. Join us for an evening of knowledge sharing and networking.",
+    "size_limit": 65
+  },
+  {
+    "event_title": "Inverse Tech Summit",
+    "image": "https://assetsio.reedpopcdn.com/the-making-of-system-shock-2s-best-level-1504277832620.jpg?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp",
+    "location": { "lat": 51.5074, "long": -0.1278 },
+    "date_time": "2023-09-11T18:30:00Z",
+    "attending": [],
+    "topics": ["Technology Trends", "Innovation"],
+    "description": "Inverse Tech Summit brings together visionaries and innovators to explore the future of technology. Join us for an evening of inspiring talks and discussions.",
+    "size_limit": 60
+  },
+  {
+    "event_title": "User-centric Web",
+    "image": "https://solguruz.com/wp-content/uploads/2022/09/ReactJS-Framework-Benefits.png",
+    "location": { "lat": 51.5074, "long": -0.1278 },
+    "date_time": "2023-09-06T18:00:00Z",
+    "attending": [],
+    "topics": ["User Experience", "Web Design"],
+    "description": "User-centric Web is a conference focused on user experience and web design. Join us for an evening of interactive workshops and UX case studies.",
+    "size_limit": 55
+  },
+  {
+    "event_title": "Integrated Systems Summit",
+    "image": "https://i.natgeofe.com/n/7fef9761-077c-45d0-9cca-78a984b9d614/burmese-python_thumb_4x3.jpg",
+    "location": { "lat": 53.483959, "long": -2.244644 },
+    "date_time": "2023-06-25T19:00:00Z",
+    "attending": [],
+    "topics": ["Integrated Systems", "IoT"],
+    "description": "Integrated Systems Summit is a leading event on integrated systems and the Internet of Things. Join us for an evening of demos and discussions on the future of connected systems.",
+    "size_limit": 50
+  },
+  {
+    "event_title": "Web Solutions Conference",
+    "image": "https://miro.medium.com/v2/resize:fit:1200/1*BPSx-c--z6r7tY29L19ukQ.png",
+    "location": { "lat": 51.7520, "long": -1.2577 },
+    "date_time": "2023-05-17T18:30:00Z",
+    "attending": [],
+    "topics": ["Web Development", "E-commerce"],
+    "description": "Web Solutions Conference is a must-attend event for web developers and e-commerce professionals. Join us for an evening of workshops and talks on building scalable web solutions.",
+    "size_limit": 45
+  },
+  {
+    "event_title": "Streamlined UX",
+    "image": "https://uswfoxtail.blob.core.windows.net/foxtail-prod-uploads/images/Thinks.8dd35e85.fill-1366x700.format-jpeg.jpegquality-80.jpg",
+    "location": { "lat": 51.5074, "long": -0.1278 },
+    "date_time": "2023-10-22T18:00:00Z",
+    "attending": [],
+    "topics": ["User Experience", "Design Thinking"],
+    "description": "Streamlined UX is a conference dedicated to enhancing user experiences through design thinking. Join us for an evening of hands-on workshops and UX case studies.",
+    "size_limit": 40
+  },
+  {
+    "event_title": "Optional Tech Summit",
+    "image": "https://assetsio.reedpopcdn.com/the-making-of-system-shock-2s-best-level-1504277832620.jpg?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp",
+    "location": { "lat": 54.5973, "long": -5.9301 },
+    "date_time": "2023-02-13T19:30:00Z",
+    "attending": [],
+    "topics": ["Software Development", "Tech Innovation"],
+    "description": "Optional Tech Summit brings together tech enthusiasts and software developers. Join us for an evening of tech talks and demos showcasing the latest innovations.",
+    "size_limit": 35
+  },
+  {
+    "event_title": "Ergonomic IT Conference",
+    "image": "https://solguruz.com/wp-content/uploads/2022/09/ReactJS-Framework-Benefits.png",
+    "location": { "lat": 54.9783, "long": -1.6175 },
+    "date_time": "2023-01-03T19:00:00Z",
+    "attending": [],
+    "topics": ["IT Infrastructure", "Cybersecurity"],
+    "description": "Ergonomic IT Conference focuses on building secure and ergonomic IT systems. Join us for an evening of expert talks and practical demonstrations.",
+    "size_limit": 30
+  },
+  {
+    "event_title": "Hybrid Solutions Forum",
+    "image": "https://i.natgeofe.com/n/7fef9761-077c-45d0-9cca-78a984b9d614/burmese-python_thumb_4x3.jpg",
+    "location": { "lat": 51.5074, "long": -0.1278 },
+    "date_time": "2023-09-26T18:00:00Z",
+    "attending": [],
+    "topics": ["Hybrid Solutions", "Cloud Computing"],
+    "description": "Hybrid Solutions Forum brings together industry leaders to explore the latest in hybrid cloud computing. Join us for an evening of insightful discussions and case studies.",
+    "size_limit": 25
+  },
+  {
+    "event_title": "Reactive Networks Summit",
+    "image": "https://miro.medium.com/v2/resize:fit:1200/1*BPSx-c--z6r7tY29L19ukQ.png",
+    "location": { "lat": 51.5074, "long": -0.1278 },
+    "date_time": "2023-04-09T19:30:00Z",
+    "attending": [],
+    "topics": ["Network Security", "Network Architecture"],
+    "description": "Reactive Networks Summit is a leading event on network security and architecture. Join us for an evening of hands-on workshops and discussions on building reactive networks.",
+    "size_limit": 20
+  },
+  {
+    "event_title": "Internet Solutions Expo",
+    "image": "https://uswfoxtail.blob.core.windows.net/foxtail-prod-uploads/images/Thinks.8dd35e85.fill-1366x700.format-jpeg.jpegquality-80.jpg",
+    "location": { "lat": 54.5973, "long": -5.9301 },
+    "date_time": "2023-03-21T18:00:00Z",
+    "attending": [],
+    "topics": ["Internet Technology", "Web Services"],
+    "description": "Internet Solutions Expo is a showcase of the latest internet technologies and web services. Join us for an evening of demos and talks on internet innovations.",
+    "size_limit": 15
+  },
+  {
+    "event_title": "Interface Innovation Summit",
+    "image": "https://assetsio.reedpopcdn.com/the-making-of-system-shock-2s-best-level-1504277832620.jpg?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp",
+    "location": { "lat": 54.9783, "long": -1.6175 },
+    "date_time": "2023-10-11T18:30:00Z",
+    "attending": [],
+    "topics": ["User Interface", "Interaction Design"],
+    "description": "Interface Innovation Summit is a conference on user interface and interaction design. Join us for an evening of inspiring talks and hands-on UI workshops.",
+    "size_limit": 10
+  },
+  {
+    "event_title": "Heuristic Tech Symposium",
+    "image": "https://solguruz.com/wp-content/uploads/2022/09/ReactJS-Framework-Benefits.png",
+    "location": { "lat": 51.5074, "long": -0.1278 },
+    "date_time": "2022-12-27T18:00:00Z",
+    "attending": [],
+    "topics": ["Technology Trends", "Innovation"],
+    "description": "Heuristic Tech Symposium brings together visionaries and innovators to explore the future of technology. Join us for an evening of inspiring talks and discussions.",
+    "size_limit": 5
+  },
+  {
+    "event_title": "Front-line Tech Forum",
+    "image": "https://i.natgeofe.com/n/7fef9761-077c-45d0-9cca-78a984b9d614/burmese-python_thumb_4x3.jpg",
+    "location": { "lat": 51.5074, "long": -0.1278 },
+    "date_time": "2023-05-30T18:30:00Z",
+    "attending": [],
+    "topics": ["Front-end Development", "Tech Trends"],
+    "description": "Front-line Tech Forum is a conference for front-end developers and tech enthusiasts. Join us for an evening of tech talks and workshops on the latest front-end technologies.",
+    "size_limit": 75
+  },
+  {
+    "event_title": "Mandatory IT Summit",
+    "image": "https://miro.medium.com/v2/resize:fit:1200/1*BPSx-c--z6r7tY29L19ukQ.png",
+    "location": { "lat": 51.5074, "long": -0.1278 },
+    "date_time": "2023-05-12T18:00:00Z",
+    "attending": [],
+    "topics": ["IT Solutions", "IT Management"],
+    "description": "Mandatory IT Summit is a must-attend event for IT professionals. Join us for an evening of expert talks and discussions on IT solutions and management best practices.",
+    "size_limit": 80
+  },
+  {
+    "event_title": "Next Generation Tech",
+    "image": "https://uswfoxtail.blob.core.windows.net/foxtail-prod-uploads/images/Thinks.8dd35e85.fill-1366x700.format-jpeg.jpegquality-80.jpg",
+    "location": { "lat": 53.9591, "long": -1.0815 },
+    "date_time": "2023-06-25T19:30:00Z",
+    "attending": [],
+    "topics": ["Future Technologies", "Tech Innovations"],
+    "description": "Next Generation Tech is a conference focused on the future of technology and tech innovations. Join us for an evening of inspiring talks and demos.",
+    "size_limit": 75
+  },
+  {
+    "event_title": "Capacity Planning Summit",
+    "image": "https://assetsio.reedpopcdn.com/the-making-of-system-shock-2s-best-level-1504277832620.jpg?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp",
+    "location": { "lat": 53.4084, "long": -2.9916 },
+    "date_time": "2023-03-16T18:00:00Z",
+    "attending": [],
+    "topics": ["Capacity Planning", "Resource Management"],
+    "description": "Capacity Planning Summit is a premier event on capacity planning and resource management. Join us for an evening of expert talks and case studies.",
+    "size_limit": 70
+  }
+]
