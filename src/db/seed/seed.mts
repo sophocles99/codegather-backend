@@ -37,7 +37,8 @@ interface INewProfile {
 }
 
 const seed = () => {
-  db.dropCollection("users")
+  console.log("Seeding database...");
+  return db.dropCollection("users")
     .then(() => {
       return db.dropCollection("events");
     })
@@ -68,7 +69,7 @@ const seed = () => {
     })
     .then(() => {
       console.log("Profiles collection created");
-      console.log("Events collection created");
+      console.log("Events collection created\n");
       db.close();
     })
     .catch((e) => {

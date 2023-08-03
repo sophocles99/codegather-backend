@@ -18,7 +18,7 @@ const ProfileSchema = new mongoose.Schema<IProfile>({
     user_id: { type: Schema.ObjectId, ref:UserModel, required: true },
     first_name: { type: String, required: true },
     last_name: { type: String, required: true },
-    username: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
     gender: { type: String, required: false },
     avatar: { type: String, required: false },
     location: { type: String, required: true }, //This can be co-ordinates or a string.

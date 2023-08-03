@@ -49,7 +49,6 @@ const loginUser = (req: Request, res: Response) => {
 
 const createUser = (req: Request, res: Response) => {
   const { user } = req.body;
-  console.log(user)
   const {
     email,
     password,
@@ -77,18 +76,36 @@ const createUser = (req: Request, res: Response) => {
     interests,
     host_ratings,
   };
-  let returnedUser = {};
   UserModel.create(newUser)
     .then((data) => {
-      returnedUser = data;
       newProfile.user_id = data._id;
-      ProfileModel.create(newProfile).then((data) => {
-        const returnedProfile = data;
-        res.status(200).json({ returnedUser, returnedProfile });
+      return ProfileModel.create(newProfile);
+    })
+    .then((data) => {
+      res.status(201).send({
+        success: true,
+        msg: "New user and profile created",
+        user_id: data.user_id,
+        profile_id: data._id,
       });
     })
     .catch((err) => {
-      console.log(err);
+      if (err.code === 11000 && err.keyValue.email) {
+        return res.status(409).send({
+          success: false,
+          msg: "Email already in use",
+          user_id: null,
+          profile_id: null,
+        });
+      }
+      if (err.code === 11000 && err.keyValue.username) {
+        return res.status(409).send({
+          success: false,
+          msg: "Username already in use",
+          user_id: null,
+          profile_id: null,
+        });
+      }
       res.sendStatus(400);
     });
 };
