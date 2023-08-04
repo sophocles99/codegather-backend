@@ -3,10 +3,16 @@ import { EventModel } from "../models/events.model.mjs";
 
 const getEvents = (req: Request, res: Response) => {
   const topic: any = req.query.topic;
+  
   EventModel.find()
   .then((events) => {
+    if(topic){
       const filteredEvents = events.filter(event => event.topics.includes(topic))
       res.status(200).json(filteredEvents);
+    }else {
+      res.status(200).json(events);
+    }
+      
     })
     .catch((err) => {
       console.log(err);
