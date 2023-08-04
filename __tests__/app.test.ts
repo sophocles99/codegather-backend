@@ -296,3 +296,29 @@ describe("GET /api/events?topics=html", () => {
       });
   });
 });
+
+describe("GET /api/profiles", () => {
+  test("200: GET all events.", () => {
+
+    return request(app)
+      .get("/api/profiles/")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body)
+        const {profiles} = body
+        profiles.forEach((profile) => {
+          expect(profile).toHaveProperty("_id", expect.any(String));
+          expect(profile).toHaveProperty("first_name", expect.any(String));
+          expect(profile).toHaveProperty("last_name", expect.any(String));
+          expect(profile).toHaveProperty("username", expect.any(String));
+          expect(profile).toHaveProperty("gender", expect.any(String))
+          expect(profile).toHaveProperty("avatar", expect.any(String))
+          expect(profile).toHaveProperty("location", expect.any(String))
+          expect(profile).toHaveProperty("date_of_birth", expect.any(String))
+          expect(profile).toHaveProperty("gender", expect.any(String))
+          expect(profile).toHaveProperty("interests", expect.any(String))
+          expect(profile).toHaveProperty("host_ratings", expect.any(Number))
+        });
+      });
+  });
+});
