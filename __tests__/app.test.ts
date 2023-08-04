@@ -12,7 +12,9 @@ describe("GET /", () => {
       .get("/")
       .expect(200)
       .then(({ text }) => {
-        expect(text).toBe("WELCOME TO CODEGATHERS API \n Start with this end point '/api' ");
+        expect(text).toBe(
+          "WELCOME TO CODEGATHERS API \n Start with this end point '/api' "
+        );
       });
   });
 });
@@ -27,16 +29,21 @@ describe("Invalid Endpoint", () => {
           "/": "Welcome message",
           "GET /api": "responds with a list of available endpoints",
           "GET /api/users": "responds with a list of topics",
-          "GET /api/users/:user_id": "responds with a single article by article_id",
+          "GET /api/users/:user_id":
+            "responds with a single article by article_id",
           "GET /api/profile": "responds with a list of articles",
-          "GET /api/events/:article_id/comments": "responds with a list of comments by article_id",
-          "POST /api/events/:article_id/comments": "add a comment by article_id",
+          "GET /api/events/:article_id/comments":
+            "responds with a list of comments by article_id",
+          "POST /api/events/:article_id/comments":
+            "add a comment by article_id",
           "PATCH /api/events/:article_id": "updates an article by article_id",
           "DELETE /api/comments/:comment_id": "deletes a comment by comment_id",
           "GET /api/events": "responds with a list of events",
-          "GET /api/events (queries)": "allows events to be filtered and sorted",
-          "GET /api/events/:article_id (comment count)": "adds a comment count to the response when retrieving a single article"
-          });
+          "GET /api/events (queries)":
+            "allows events to be filtered and sorted",
+          "GET /api/events/:article_id (comment count)":
+            "adds a comment count to the response when retrieving a single article",
+        });
       });
   });
 });
@@ -115,7 +122,7 @@ describe("POST /api/users/createuser", () => {
         first_name: "Daniel",
         last_name: "Daniels",
         username: "whoTheDan",
-        gender: 'ale',
+        gender: "ale",
         location: "Stockport",
         date_of_birth: "1999-12-01",
         coding_languages: ["Go", "Fortran"],
@@ -258,7 +265,6 @@ describe("GET /api/events/:event_id", () => {
   });
 });
 
-
 //GET events by topics field
 describe("GET /api/events?topics=html", () => {
   test("200: GET all events filtered by the given topic.", () => {
@@ -300,25 +306,24 @@ describe("GET /api/events?topics=html", () => {
 
 describe("GET /api/profiles", () => {
   test("200: GET all profiles.", () => {
-
     return request(app)
       .get("/api/profiles/")
       .expect(200)
       .then(({ body }) => {
-        console.log(body)
-        const {profiles} = body
+        console.log(body);
+        const { profiles } = body;
         profiles.forEach((profile) => {
           expect(profile).toHaveProperty("_id", expect.any(String));
           expect(profile).toHaveProperty("first_name", expect.any(String));
           expect(profile).toHaveProperty("last_name", expect.any(String));
           expect(profile).toHaveProperty("username", expect.any(String));
-          expect(profile).toHaveProperty("gender", expect.any(String))
-          expect(profile).toHaveProperty("avatar", expect.any(String))
-          expect(profile).toHaveProperty("location", expect.any(String))
-          expect(profile).toHaveProperty("date_of_birth", expect.any(String))
-          expect(profile).toHaveProperty("gender", expect.any(String))
-          expect(profile).toHaveProperty("interests", expect.any(String))
-          expect(profile).toHaveProperty("host_ratings", expect.any(Number))
+          expect(profile).toHaveProperty("gender", expect.any(String));
+          expect(profile).toHaveProperty("avatar", expect.any(String));
+          expect(profile).toHaveProperty("location", expect.any(String));
+          expect(profile).toHaveProperty("date_of_birth", expect.any(String));
+          expect(profile).toHaveProperty("gender", expect.any(String));
+          expect(profile).toHaveProperty("interests", expect.any(String));
+          expect(profile).toHaveProperty("host_ratings", expect.any(Number));
         });
       });
   });
@@ -332,19 +337,19 @@ describe("GET /api/profiles/:id", () => {
       .then(({ body }) => {
         const { profile } = body;
         expect(profile).toMatchObject({
-          _id: '64cd0af663676f777f773ba0',
+          _id: "64cd0af663676f777f773ba0",
           user_id: expect.any(String),
-    first_name: expect.any(String),
-    last_name: expect.any(String),
-    username: expect.any(String),
-    gender: expect.any(String),
-    avatar: expect.any(String),
-    location: expect.any(String),
-    date_of_birth: expect.any(String),
-    coding_languages: expect.any(Array),
-    interests: expect.any(String),
-    host_ratings: expect.any(Number)
-        })
+          first_name: expect.any(String),
+          last_name: expect.any(String),
+          username: expect.any(String),
+          gender: expect.any(String),
+          avatar: expect.any(String),
+          location: expect.any(String),
+          date_of_birth: expect.any(String),
+          coding_languages: expect.any(Array),
+          interests: expect.any(String),
+          host_ratings: expect.any(Number),
+        });
       });
   });
   test("404: responds with an error message if passed an invalid ID.", () => {
@@ -353,6 +358,38 @@ describe("GET /api/profiles/:id", () => {
       .expect(404)
       .then(({ body }) => {
         expect(body.msg).toEqual("Not Found");
+      });
+  });
+});
+
+describe("PATCH /api/profiles/:id", () => {
+  test("200: responds with JSON object of updated profile for a given profile id", () => {
+    const testProfile = {
+      profilePatches: {
+        first_name: "Alex",
+      },
+    };
+    return request(app)
+      .patch("/api/profiles/64cd0af663676f777f773ba0")
+      .send(testProfile)
+      .expect(200)
+      .then(({ body }) => {
+        const { profile } = body;
+        expect(profile).toMatchObject({
+          user_id: expect.any(String),
+          first_name: "Alex",
+          last_name: "Lawrenceson",
+          username: "glawrenceson0",
+          gender: "Male",
+          avatar:
+            "https://robohash.org/quisexpeditaimpedit.png?size=50x50&set=set1",
+          location: "Visoko",
+          date_of_birth: "2023-04-18T00:00:00.000Z",
+          coding_languages: ["JavaScript"],
+          interests:
+            "est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu",
+          host_ratings: 0,
+        });
       });
   });
 });
