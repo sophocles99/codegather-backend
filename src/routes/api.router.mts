@@ -10,6 +10,6 @@ const apiRouter: Router = Router();
 
 apiRouter.use("/users", userRouter);
 apiRouter.use("/events", eventRouter);
-apiRouter.use("/", displayEndpoints);
+apiRouter.use("*", displayEndpoints);
 
 export { apiRouter };
