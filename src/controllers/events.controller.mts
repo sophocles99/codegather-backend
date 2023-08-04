@@ -1,15 +1,18 @@
 import { Request, Response } from "express";
 import { EventModel } from "../models/events.model.mjs";
 
-const getEvents = (req: Request, res: Response) =>
+const getEvents = (req: Request, res: Response) => {
+  const topic: any = req.query.topic;
   EventModel.find()
-    .then((data) => {
-      res.status(200).json(data);
+  .then((events) => {
+      const filteredEvents = events.filter(event => event.topics.includes(topic))
+      res.status(200).json(filteredEvents);
     })
     .catch((err) => {
       console.log(err);
       res.sendStatus(400);
     })
+  };
 
 const getEventById = (req: Request, res: Response) => {
   const { id } = req.params;
@@ -18,7 +21,6 @@ const getEventById = (req: Request, res: Response) => {
     res.status(200).send({event});
   })
   .catch((err) => {
-    console.log('Inside catch of getEventById');
     res.status(404).send({msg:"Not Found"});
     })
 };
