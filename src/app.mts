@@ -10,10 +10,10 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/api", apiRouter)
+app.use("/api", apiRouter);
 
 app.get("/", (req: Request, res: Response)=> {
-  res.status(200).send("Hello from the CodeGather server")
+  res.status(200).send("WELCOME TO CODEGATHERS API \n Start with this end point '/api' ");
 })
 
 app.all('*', noRouteFound)

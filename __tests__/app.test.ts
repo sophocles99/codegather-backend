@@ -12,17 +12,34 @@ describe("GET /", () => {
       .get("/")
       .expect(200)
       .then(({ text }) => {
-        expect(text).toBe("Hello from the CodeGather server");
+        expect(text).toBe("WELCOME TO CODEGATHERS API \n Start with this end point '/api' ");
       });
   });
 });
 
-// describe("Invalid Endpoint", () => {
-//   test("404: Invalid endpoint", () => {
-//     return request(app).get("/api/notanendpoint").expect(404).then(({body})=>
-//     expect(body.msg).toBe("Not found"));
-//   });
-// });
+describe("Invalid Endpoint", () => {
+  test("200: responds with a list of endpoints", () => {
+    return request(app)
+      .get("/api/even")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body).toEqual({
+          "/": "Welcome message",
+          "GET /api": "responds with a list of available endpoints",
+          "GET /api/users": "responds with a list of topics",
+          "GET /api/users/:user_id": "responds with a single article by article_id",
+          "GET /api/profile": "responds with a list of articles",
+          "GET /api/events/:article_id/comments": "responds with a list of comments by article_id",
+          "POST /api/events/:article_id/comments": "add a comment by article_id",
+          "PATCH /api/events/:article_id": "updates an article by article_id",
+          "DELETE /api/comments/:comment_id": "deletes a comment by comment_id",
+          "GET /api/events": "responds with a list of events",
+          "GET /api/events (queries)": "allows events to be filtered and sorted",
+          "GET /api/events/:article_id (comment count)": "adds a comment count to the response when retrieving a single article"
+          });
+      });
+  });
+});
 
 describe("GET /api/users", () => {
   test("200: GET all users", () => {
@@ -240,13 +257,42 @@ describe("GET /api/events/:event_id", () => {
   });
 });
 
-describe("Invalid Endpoint", () => {
-  test("400: responds with an error message if searched with a wrong url. URL: /api/events...", () => {
+
+//GET events by topics field
+describe("GET /api/events?topics=html", () => {
+  test("200: GET all events filtered by the given topic.", () => {
+    interface IEvent {
+      _id: String;
+      user_id?: string;
+      event_title: string;
+      image: string;
+      location: number[];
+      date_time: Date;
+      attending: string[];
+      topics: string[];
+      description: string;
+      size_limit: number;
+      participation_group: string[];
+    }
     return request(app)
-      .get("/api/even")
-      .expect(400)
+      .get("/api/events?topic=Innovation")
+      .expect(200)
       .then(({ body }) => {
-        expect(body.msg).toEqual("Bad Request");
+        body.forEach((event: IEvent) => {
+          expect(event).toHaveProperty("_id", expect.any(String));
+          expect(event).toHaveProperty("user_id", expect.any(String));
+          expect(event).toHaveProperty("event_title", expect.any(String));
+          expect(event).toHaveProperty("image", expect.any(String));
+          expect(event.location).toMatchObject({
+            lat: expect.any(Number),
+            long: expect.any(Number),
+          });
+          expect(event).toHaveProperty("date_time", expect.any(String));
+          expect(event).toHaveProperty("attending", expect.any(Array));
+          expect(event).toHaveProperty("topics", expect.any(Array));
+          expect(event).toHaveProperty("description", expect.any(String));
+          expect(event).toHaveProperty("size_limit", expect.any(Number));
+        });
       });
   });
 });
