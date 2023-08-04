@@ -38,3 +38,6 @@ get {{baseUrl}}/events/64ccb705ee5bbdb21111e379
 
 ###
 get {{baseUrl}}/events?topic=Innovation
+
+###
+get {{baseUrl}}/profiles

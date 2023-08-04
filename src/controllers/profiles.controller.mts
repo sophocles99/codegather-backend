@@ -41,16 +41,17 @@ const getProfiles = (req: Request, res: Response) =>
       console.log(err);
       res.sendStatus(400);
     });
-// const getEventById = (req: Request, res: Response) => {
-//   const { id } = req.params;
-//   EventModel.findById(id.toString())
-//     .then((event) => {
-//       res.status(200).send({ event });
-//     })
-//     .catch((err) => {
-//       res.status(404).send({ msg: "Not Found" });
-//     });
-// };
+
+const getProfileById = (req: Request, res: Response) => {
+  const { id } = req.params;
+  ProfileModel.findById(id.toString())
+    .then((profile) => {
+      res.status(200).send({ profile });
+    })
+    .catch((err) => {
+      res.status(404).send({ msg: "Not Found" });
+    });
+};
 
 // const postEvent = (req: Request, res: Response) => {
 //   const { event } = req.body;
@@ -80,4 +81,4 @@ const noRouteFound = (req: Request, res: Response) => {
   res.status(400).send({ msg: "Bad Request" });
 };
 
-export { getProfiles, noRouteFound };
+export { getProfiles, noRouteFound, getProfileById };

@@ -115,6 +115,7 @@ describe("POST /api/users/createuser", () => {
         first_name: "Daniel",
         last_name: "Daniels",
         username: "whoTheDan",
+        gender: 'ale',
         location: "Stockport",
         date_of_birth: "1999-12-01",
         coding_languages: ["Go", "Fortran"],
@@ -298,7 +299,7 @@ describe("GET /api/events?topics=html", () => {
 });
 
 describe("GET /api/profiles", () => {
-  test("200: GET all events.", () => {
+  test("200: GET all profiles.", () => {
 
     return request(app)
       .get("/api/profiles/")
@@ -319,6 +320,39 @@ describe("GET /api/profiles", () => {
           expect(profile).toHaveProperty("interests", expect.any(String))
           expect(profile).toHaveProperty("host_ratings", expect.any(Number))
         });
+      });
+  });
+});
+
+describe("GET /api/profiles/:id", () => {
+  test("200: responds with JSON object of profile for a given profile id.", () => {
+    return request(app)
+      .get("/api/profiles/64cd0af663676f777f773ba0")
+      .expect(200)
+      .then(({ body }) => {
+        const { profile } = body;
+        expect(profile).toMatchObject({
+          _id: '64cd0af663676f777f773ba0',
+          user_id: expect.any(String),
+    first_name: expect.any(String),
+    last_name: expect.any(String),
+    username: expect.any(String),
+    gender: expect.any(String),
+    avatar: expect.any(String),
+    location: expect.any(String),
+    date_of_birth: expect.any(String),
+    coding_languages: expect.any(Array),
+    interests: expect.any(String),
+    host_ratings: expect.any(Number)
+        })
+      });
+  });
+  test("404: responds with an error message if passed an invalid ID.", () => {
+    return request(app)
+      .get("/api/profiles/1500")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toEqual("Not Found");
       });
   });
 });
