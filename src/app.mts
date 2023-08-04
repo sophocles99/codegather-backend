@@ -12,10 +12,14 @@ app.use(express.json());
 
 app.use("/api", apiRouter);
 
-app.get("/", (req: Request, res: Response)=> {
-  res.status(200).send("WELCOME TO CODEGATHERS API \n Start with this end point '/api' ");
-})
+app.get("/", (req: Request, res: Response) => {
+  res
+    .status(200)
+    .send("WELCOME TO CODEGATHER API \n Start with this end point '/api' ");
+});
 
-app.all('*', noRouteFound)
+app.all("*", (req: Request, res: Response) => {
+  res.status(400).send({ msg: "Bad Request" });
+});
 
-export default app
+export default app;

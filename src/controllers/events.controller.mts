@@ -55,8 +55,4 @@ const deleteEventById = (req: Request, res: Response) => {
     });
 };
 
-const noRouteFound = (req: Request, res: Response) => {
-  res.status(400).send({msg: "Bad Request"});
-}
-
 export { getEvents, getEventById, postEvent, deleteEventById, noRouteFound };

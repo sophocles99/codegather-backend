@@ -45,31 +45,9 @@ const patchProfileById = (req: Request, res: Response) => {
     { ...profilePatches },
     { new: true }
   ).then((profile) => {
-    console.log(profile)
     res.status(200).send({ profile });
   });
 };
-// ProfileModel.findById(req.params.id).then((profile) => {
-//   if (profile == null) {
-//     return res.status(404).send({ message: "Cannot find profile" });
-//   }
-// res.profile = profile;
-// next();
-//   if (req.body.first_name != null) res.profile.first_name = req.body.first_name;
-//   if (req.body.last_name != null) res.profile.last_name = req.body.last_name;
-//   if (req.body.gender != null) res.profile.gender = req.body.gender;
-//   if (req.body.avatar != null) res.profile.avatar = req.body.avatar;
-//   if (req.body.location != null) res.profile.location = req.body.location;
-//   if (req.body.coding_languages != null)
-//     res.profile.coding_languages = req.body.coding_languages;
-//   if (req.body.interests != null) res.profile.interests = req.body.interests;
-//   return res.profile
-//     .save()
-//     .then((updatedProfile) => {
-//       return res.json(updatedProfile);
-//     })
-//     .catch((err) => res.status(400).json({ message: err.message }));
-// };
 
 // For reference in case we make a deleteProfile endpoint
 // const deleteEventById = (req: Request, res: Response) => {
@@ -84,8 +62,4 @@ const patchProfileById = (req: Request, res: Response) => {
 //     });
 // };
 
-const noRouteFound = (req: Request, res: Response) => {
-  res.status(400).send({ msg: "Bad Request" });
-};
-
-export { getProfiles, noRouteFound, getProfileById, patchProfileById };
+export { getProfiles, getProfileById, patchProfileById };
