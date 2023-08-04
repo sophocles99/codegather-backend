@@ -2,7 +2,6 @@ import cors from "cors";
 import express, { Express, Request, Response } from "express";
 import "./db/connection.mjs";
 import { apiRouter } from "./routes/api.router.mjs";
-import { noRouteFound } from "./controllers/events.controller.mjs";
 
 const app: Express = express();
 
@@ -15,7 +14,7 @@ app.use("/api", apiRouter);
 app.get("/", (req: Request, res: Response) => {
   res
     .status(200)
-    .send("WELCOME TO CODEGATHER API \n Start with this end point '/api' ");
+    .send("WELCOME TO CODEGATHER API. Start with this end point '/api'");
 });
 
 app.all("*", (req: Request, res: Response) => {

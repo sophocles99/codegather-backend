@@ -13,7 +13,7 @@ describe("GET /", () => {
       .expect(200)
       .then(({ text }) => {
         expect(text).toBe(
-          "WELCOME TO CODEGATHERS API \n Start with this end point '/api' "
+          "WELCOME TO CODEGATHER API. Start with this end point '/api'"
         );
       });
   });
@@ -362,7 +362,7 @@ describe("GET /api/profiles/:id", () => {
   });
 });
 
-describe.only("PATCH /api/profiles/:id", () => {
+describe("PATCH /api/profiles/:id", () => {
   test("200: responds with JSON object of updated profile for a given profile id", () => {
     const testProfile = {
       profilePatches: {
