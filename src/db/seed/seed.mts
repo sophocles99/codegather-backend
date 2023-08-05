@@ -1,4 +1,7 @@
+import { writeFile } from "fs/promises";
+import { URL } from "url";
 import db from "../connection.mjs";
+
 import { Types } from "mongoose";
 import {
   usersData,
@@ -8,6 +11,10 @@ import {
 import { UserModel } from "../../models/users.model.mjs";
 import { EventModel } from "../../models/events.model.mjs";
 import { ProfileModel } from "../../models/profiles.model.mjs";
+
+let sampleUserId = "";
+let sampleProfileId = "";
+let sampleEventId = "";
 
 interface INewEvent {
   user_id?: Types.ObjectId; //mongoose.Types.ObjectId - different from Schema.Types.ObjectId
@@ -50,6 +57,7 @@ const seed = () => {
     })
     .then((data) => {
       console.log("Users collection created");
+      sampleUserId = String(data[0]._id);
       const modifiedProfiles = profilesData.map((profile) => {
         const newProfile: INewProfile = { ...profile };
         const userIdIndex = Math.floor(Math.random() * data.length);
@@ -63,20 +71,29 @@ const seed = () => {
         return newEvent;
       });
       return Promise.all([
-        ProfileModel.insertMany(modifiedProfiles),
-        EventModel.insertMany(modifiedEvents),
+        ProfileModel.insertMany(modifiedProfiles).then(
+          (data) => (sampleProfileId = String(data[0]._id))
+        ),
+        EventModel.insertMany(modifiedEvents).then(
+          (data) => (sampleEventId = String(data[0]._id))
+        ),
       ]);
     })
     .then(() => {
       console.log("Profiles collection created");
       console.log("Events collection created\n");
       db.close();
+      return { sampleUserId, sampleProfileId, sampleEventId };
     })
     .catch((e) => {
       console.log(e.message);
     });
 };
 
-seed();
+const __dirname = new URL(".", import.meta.url).pathname;
+
+seed().then((sampleIds) =>
+  writeFile(`${__dirname}sampleIds.json`, JSON.stringify(sampleIds))
+);
 
 export default seed;

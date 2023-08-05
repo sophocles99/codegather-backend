@@ -11,14 +11,8 @@ app.use(express.json());
 
 app.use("/api", apiRouter);
 
-app.get("/", (req: Request, res: Response) => {
-  res
-    .status(200)
-    .send("WELCOME TO CODEGATHER API. Start with this end point '/api'");
-});
-
-app.all("*", (req: Request, res: Response) => {
-  res.status(400).send({ msg: "Bad Request" });
+app.all("*", (_: Request, res: Response) => {
+  res.status(404).send({ success: false, msg: "Not found" });
 });
 
 export default app;

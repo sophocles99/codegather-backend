@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test": "npm run seed && node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
     "build": "npx tsc",
     "dev": "npx tsc -w & nodemon dist/listen.mjs",
     "seed": "node dist/db/seed/seed.mjs",

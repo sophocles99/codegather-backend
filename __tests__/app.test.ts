@@ -1,31 +1,24 @@
 import request from "supertest";
 import app from "../dist/app.mjs";
 import db from "../dist/db/connection.mjs";
+import sampleIds from "../dist/db/seed/sampleIds.json";
+
+const { sampleUserId, sampleProfileId, sampleEventId } = sampleIds;
 
 afterAll(() => {
   return db.close();
 });
 
-describe("GET /", () => {
-  test("200: returns message from server", () => {
-    return request(app)
-      .get("/")
-      .expect(200)
-      .then(({ text }) => {
-        expect(text).toBe(
-          "WELCOME TO CODEGATHER API. Start with this end point '/api'"
-        );
-      });
-  });
-});
-
-describe("Invalid Endpoint", () => {
+describe("GET /api", () => {
   test("200: responds with a list of endpoints", () => {
     return request(app)
-      .get("/api/even")
+      .get("/api")
       .expect(200)
       .then(({ body }) => {
-        expect(body).toEqual({
+        const {success, msg, endpoints} = body
+        expect(success).toEqual(true)
+        expect(msg).toEqual("List of endpoints")
+        expect(endpoints).toEqual({
           "/": "Welcome message",
           "GET /api": "responds with a list of available endpoints",
           "GET /api/users": "responds with a list of topics",
@@ -206,7 +199,6 @@ describe("GET /api/events", () => {
       topics: string[];
       description: string;
       size_limit: number;
-      participation_group: string[];
     }
     return request(app)
       .get("/api/events")
@@ -236,9 +228,9 @@ describe("GET /api/events", () => {
 // command from package.json "test" script, and paste real event_id into
 // the get request in the test
 describe("GET /api/events/:event_id", () => {
-  xtest("200: responds with JSON object of all events for a given event_id.", () => {
+  test("200: responds with JSON object of the event for a given event_id.", () => {
     return request(app)
-      .get("/api/events/64cbb370c05f6e09e39b6363")
+      .get(`/api/events/${sampleEventId}`)
       .expect(200)
       .then(({ body }) => {
         const { event } = body;
@@ -246,13 +238,15 @@ describe("GET /api/events/:event_id", () => {
         expect(event).toHaveProperty("user_id", expect.any(String));
         expect(event).toHaveProperty("event_title", expect.any(String));
         expect(event).toHaveProperty("image", expect.any(String));
-        expect(event).toHaveProperty("location", expect.any(Array));
+        expect(event.location).toMatchObject({
+          lat: expect.any(Number),
+          long: expect.any(Number),
+        });
         expect(event).toHaveProperty("date_time", expect.any(String));
         expect(event).toHaveProperty("attending", expect.any(Array));
         expect(event).toHaveProperty("topics", expect.any(Array));
         expect(event).toHaveProperty("description", expect.any(String));
         expect(event).toHaveProperty("size_limit", expect.any(Number));
-        expect(event).toHaveProperty("participation_group", expect.any(Array));
       });
   });
   test("404: responds with an error message if passed an invalid ID.", () => {
@@ -266,11 +260,11 @@ describe("GET /api/events/:event_id", () => {
 });
 
 //GET events by topics field
-describe("GET /api/events?topics=html", () => {
+describe("GET /api/events?topic=Innovation", () => {
   test("200: GET all events filtered by the given topic.", () => {
     interface IEvent {
       _id: String;
-      user_id?: string;
+      user_id: string;
       event_title: string;
       image: string;
       location: number[];
@@ -310,7 +304,6 @@ describe("GET /api/profiles", () => {
       .get("/api/profiles/")
       .expect(200)
       .then(({ body }) => {
-        console.log(body);
         const { profiles } = body;
         profiles.forEach((profile) => {
           expect(profile).toHaveProperty("_id", expect.any(String));
@@ -318,12 +311,9 @@ describe("GET /api/profiles", () => {
           expect(profile).toHaveProperty("last_name", expect.any(String));
           expect(profile).toHaveProperty("username", expect.any(String));
           expect(profile).toHaveProperty("gender", expect.any(String));
-          expect(profile).toHaveProperty("avatar", expect.any(String));
           expect(profile).toHaveProperty("location", expect.any(String));
           expect(profile).toHaveProperty("date_of_birth", expect.any(String));
           expect(profile).toHaveProperty("gender", expect.any(String));
-          expect(profile).toHaveProperty("interests", expect.any(String));
-          expect(profile).toHaveProperty("host_ratings", expect.any(Number));
         });
       });
   });
@@ -332,12 +322,12 @@ describe("GET /api/profiles", () => {
 describe("GET /api/profiles/:id", () => {
   test("200: responds with JSON object of profile for a given profile id.", () => {
     return request(app)
-      .get("/api/profiles/64cd0af663676f777f773ba0")
+      .get(`/api/profiles/${sampleProfileId}`)
       .expect(200)
       .then(({ body }) => {
         const { profile } = body;
         expect(profile).toMatchObject({
-          _id: "64cd0af663676f777f773ba0",
+          _id: sampleProfileId,
           user_id: expect.any(String),
           first_name: expect.any(String),
           last_name: expect.any(String),
@@ -352,7 +342,7 @@ describe("GET /api/profiles/:id", () => {
         });
       });
   });
-  test("404: responds with an error message if passed an invalid ID.", () => {
+  test("404: responds with an error message if passed an invalid id", () => {
     return request(app)
       .get("/api/profiles/1500")
       .expect(404)
@@ -370,7 +360,7 @@ describe("PATCH /api/profiles/:id", () => {
       },
     };
     return request(app)
-      .patch("/api/profiles/64cd0af663676f777f773ba0")
+      .patch(`/api/profiles/${sampleProfileId}`)
       .send(testProfile)
       .expect(200)
       .then(({ body }) => {
