@@ -99,6 +99,7 @@ const createUser = (req: Request, res: Response) => {
         });
       }
       if (err.code === 11000 && err.keyValue.username) {
+        UserModel.findByIdAndDelete(newProfile.user_id)
         return res.status(409).send({
           success: false,
           msg: "Username already in use",

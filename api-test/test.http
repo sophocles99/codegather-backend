@@ -1,15 +1,18 @@
-@baseUrl = http://localhost:8000/api
+@baseUrl = http://localhost:8000
 
 ###
-get {{baseUrl}}/users
+get {{baseUrl}}/api
 
 ###
-post {{baseUrl}}/users
+get {{baseUrl}}/api/users
+
+###
+post {{baseUrl}}/api/users/createuser
 Content-Type: application/json
 
 {
-  "createUser": {
-    "email": "danny@daniels.com",
+  "user": {
+    "email": "danny2@daniels.com",
     "password": "t00nie",
     "first_name": "Tony",
     "last_name": "Daniels",
@@ -25,19 +28,19 @@ Content-Type: application/json
 }
 
 ###
-get {{baseUrl}}/users/64ccb705ee5bbdb21111e35a
+get {{baseUrl}}/api/users/64ccb705ee5bbdb21111e35a
 
 ###
-delete {{baseUrl}}/users/64cc9b357d09898985457d7d
+delete {{baseUrl}}/api/users/64cc9b357d09898985457d7d
 
 ###
-get {{baseUrl}}/events
+get {{baseUrl}}/api/events
 
 ###
-get {{baseUrl}}/events/64ccb705ee5bbdb21111e379
+get {{baseUrl}}/api/events/64ccb705ee5bbdb21111e379
 
 ###
-get {{baseUrl}}/events?topic=Innovation
+get {{baseUrl}}/api/events?topic=Innovation
 
 ###
-get {{baseUrl}}/profiles
+get {{baseUrl}}/api/profiles

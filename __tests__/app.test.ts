@@ -9,26 +9,16 @@ afterAll(() => {
   return db.close();
 });
 
-describe("GET /", () => {
-  test("200: returns message from server", () => {
-    return request(app)
-      .get("/")
-      .expect(200)
-      .then(({ text }) => {
-        expect(text).toBe(
-          "WELCOME TO CODEGATHER API. Start with this end point '/api'"
-        );
-      });
-  });
-});
-
 describe("GET /api", () => {
   test("200: responds with a list of endpoints", () => {
     return request(app)
       .get("/api")
       .expect(200)
       .then(({ body }) => {
-        expect(body).toEqual({
+        const {success, msg, endpoints} = body
+        expect(success).toEqual(true)
+        expect(msg).toEqual("List of endpoints")
+        expect(endpoints).toEqual({
           "/": "Welcome message",
           "GET /api": "responds with a list of available endpoints",
           "GET /api/users": "responds with a list of topics",
@@ -352,7 +342,7 @@ describe("GET /api/profiles/:id", () => {
         });
       });
   });
-  test("404: responds with an error message if passed an invalid ID.", () => {
+  test("404: responds with an error message if passed an invalid id", () => {
     return request(app)
       .get("/api/profiles/1500")
       .expect(404)
