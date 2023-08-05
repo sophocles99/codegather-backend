@@ -1,17 +1,6 @@
 import { Schema, model, ObjectId } from "mongoose";
 import { UserModel } from "./users.model.mjs";
-
-interface IEvent {
-  user_id: ObjectId;
-  event_title: string;
-  image: string;
-  location: { lat: number; long: number };
-  date_time: Date;
-  attending: ObjectId[];
-  topics: string[];
-  description: string;
-  size_limit: number;
-}
+import { IEvent } from "../interfaces.mjs";
 
 const EventSchema = new Schema<IEvent>({
   user_id: { type: Schema.ObjectId, ref: UserModel, required: false },

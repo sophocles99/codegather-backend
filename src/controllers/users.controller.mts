@@ -1,32 +1,8 @@
 import { Request, Response } from "express";
-import { Types } from "mongoose";
 import { UserModel } from "../models/users.model.mjs";
 import { ProfileModel } from "../models/profiles.model.mjs";
-
-interface INewUser {
-  email: string;
-  password: string;
-}
-
-interface INewProfile {
-  user_id?: Types.ObjectId;
-  first_name: string;
-  last_name: string;
-  username: string;
-  gender: string;
-  avatar: string;
-  location: string;
-  date_of_birth: string;
-  coding_languages: string[];
-  interests: string;
-  host_ratings: number;
-}
-
-interface IReturnedUsers {
-  _id: Types.ObjectId;
-  email: string;
-  password: string;
-}
+import IUser from "../interfaces.mjs";
+import { IReturnedUsers, INewProfile } from "../interfaces.mjs";
 
 const loginUser = (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -73,22 +49,22 @@ const createUser = (req: Request, res: Response) => {
     last_name,
     username,
     gender,
-    avatar,
-    location,
     date_of_birth,
+    location,
+    avatar,
     coding_languages,
     interests,
     host_ratings,
   } = user;
-  const newUser: INewUser = { email, password };
+  const newUser: IUser = { email, password };
   const newProfile: INewProfile = {
     first_name,
     last_name,
     username,
     gender,
-    avatar,
-    location,
     date_of_birth,
+    location,
+    avatar,
     coding_languages,
     interests,
     host_ratings,
