@@ -173,23 +173,11 @@ describe("POST /api/users/createuser", () => {
 //Events testing...
 describe("GET /api/events", () => {
   test("200: GET all events.", () => {
-    interface IEvent {
-      _id: String;
-      user_id?: string;
-      event_title: string;
-      image: string;
-      location: number[];
-      date_time: Date;
-      attending: string[];
-      topics: string[];
-      description: string;
-      size_limit: number;
-    }
     return request(app)
       .get("/api/events")
       .expect(200)
       .then(({ body }) => {
-        body.forEach((event: IEvent) => {
+        body.forEach((event) => {
           expect(event).toHaveProperty("_id", expect.any(String));
           expect(event).toHaveProperty("user_id", expect.any(String));
           expect(event).toHaveProperty("event_title", expect.any(String));
@@ -209,9 +197,7 @@ describe("GET /api/events", () => {
   });
 });
 
-// To pass this test, change xdescribe to describe.only, removing seeding
-// command from package.json "test" script, and paste real event_id into
-// the get request in the test
+// Get Event by id
 describe("GET /api/events/:event_id", () => {
   test("200: responds with JSON object of the event for a given event_id.", () => {
     return request(app)
@@ -247,24 +233,12 @@ describe("GET /api/events/:event_id", () => {
 //GET events by topics field
 describe("GET /api/events?topic=Innovation", () => {
   test("200: GET all events filtered by the given topic.", () => {
-    interface IEvent {
-      _id: String;
-      user_id: string;
-      event_title: string;
-      image: string;
-      location: number[];
-      date_time: Date;
-      attending: string[];
-      topics: string[];
-      description: string;
-      size_limit: number;
-      participation_group: string[];
-    }
+
     return request(app)
       .get("/api/events?topic=Innovation")
       .expect(200)
       .then(({ body }) => {
-        body.forEach((event: IEvent) => {
+        body.forEach((event) => {
           expect(event).toHaveProperty("_id", expect.any(String));
           expect(event).toHaveProperty("user_id", expect.any(String));
           expect(event).toHaveProperty("event_title", expect.any(String));
