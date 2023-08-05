@@ -3,8 +3,8 @@ import { ObjectId, Types } from "mongoose";
 import { ProfileModel } from "../models/profiles.model.mjs";
 
 interface IReturnedProfiles {
-  _id?: Types.ObjectId;
-  user_id: string;
+  _id: ObjectId;
+  user_id: ObjectId;
   first_name: string;
   last_name: string;
   username: string;
@@ -19,7 +19,7 @@ interface IReturnedProfiles {
 
 const getProfiles = (req: Request, res: Response) =>
   ProfileModel.find()
-    .then((profiles: IReturnedProfiles[]) => {
+    .then((profiles) => {
       res.status(200).send({ profiles });
     })
     .catch((err) => {
