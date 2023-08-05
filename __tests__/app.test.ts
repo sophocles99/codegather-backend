@@ -2,6 +2,7 @@ import request from "supertest";
 import app from "../dist/app.mjs";
 import db from "../dist/db/connection.mjs";
 import sampleIds from "../dist/db/seed/sampleIds.json";
+import endpointsList from "../dist/endpointsList.mjs";
 
 const { sampleUserId, sampleProfileId, sampleEventId } = sampleIds;
 
@@ -15,28 +16,10 @@ describe("GET /api", () => {
       .get("/api")
       .expect(200)
       .then(({ body }) => {
-        const {success, msg, endpoints} = body
-        expect(success).toEqual(true)
-        expect(msg).toEqual("List of endpoints")
-        expect(endpoints).toEqual({
-          "/": "Welcome message",
-          "GET /api": "responds with a list of available endpoints",
-          "GET /api/users": "responds with a list of topics",
-          "GET /api/users/:user_id":
-            "responds with a single article by article_id",
-          "GET /api/profile": "responds with a list of articles",
-          "GET /api/events/:article_id/comments":
-            "responds with a list of comments by article_id",
-          "POST /api/events/:article_id/comments":
-            "add a comment by article_id",
-          "PATCH /api/events/:article_id": "updates an article by article_id",
-          "DELETE /api/comments/:comment_id": "deletes a comment by comment_id",
-          "GET /api/events": "responds with a list of events",
-          "GET /api/events (queries)":
-            "allows events to be filtered and sorted",
-          "GET /api/events/:article_id (comment count)":
-            "adds a comment count to the response when retrieving a single article",
-        });
+        const { success, msg, endpoints } = body;
+        expect(success).toEqual(true);
+        expect(msg).toEqual("List of endpoints");
+        expect(endpoints).toEqual(endpointsList);
       });
   });
 });
@@ -62,7 +45,7 @@ describe("GET /api/users", () => {
 });
 
 describe("POST /api/users/login", () => {
-  test("200: for valid credentials, responds with {success: true, user_id: user._id}", () => {
+  test("200: for valid credentials, responds with {success: true, msg, user_id, profile_id}", () => {
     const testLogin = {
       email: "shosier1@liveinternet.ru",
       password: "cI6#}6hO2S.",
@@ -72,8 +55,11 @@ describe("POST /api/users/login", () => {
       .send(testLogin)
       .expect(200)
       .then(({ body }) => {
-        expect(body).toHaveProperty("success", true);
-        expect(body).toHaveProperty("user_id", expect.any(String));
+        const { success, msg, user_id, profile_id } = body;
+        expect(success).toEqual(true);
+        expect(msg).toEqual("User logged in");
+        expect(user_id).toEqual(expect.any(String));
+        expect(profile_id).toEqual(expect.any(String));
       });
   });
   test("401: for invalid email, responds with {success: false, user_id: null}", () => {
@@ -115,9 +101,8 @@ describe("POST /api/users/createuser", () => {
         first_name: "Daniel",
         last_name: "Daniels",
         username: "whoTheDan",
-        gender: "ale",
-        location: "Stockport",
         date_of_birth: "1999-12-01",
+        location: "Stockport",
         coding_languages: ["Go", "Fortran"],
       },
     };
@@ -306,14 +291,20 @@ describe("GET /api/profiles", () => {
       .then(({ body }) => {
         const { profiles } = body;
         profiles.forEach((profile) => {
-          expect(profile).toHaveProperty("_id", expect.any(String));
-          expect(profile).toHaveProperty("first_name", expect.any(String));
-          expect(profile).toHaveProperty("last_name", expect.any(String));
-          expect(profile).toHaveProperty("username", expect.any(String));
-          expect(profile).toHaveProperty("gender", expect.any(String));
-          expect(profile).toHaveProperty("location", expect.any(String));
-          expect(profile).toHaveProperty("date_of_birth", expect.any(String));
-          expect(profile).toHaveProperty("gender", expect.any(String));
+          expect(profile).toMatchObject({
+            _id: expect.any(String),
+            user_id: expect.any(String),
+            first_name: expect.any(String),
+            last_name: expect.any(String),
+            username: expect.any(String),
+            date_of_birth: expect.any(String),
+            location: expect.any(String),
+            // Not testing for optional fields
+            // avatar: expect.any(String),
+            // coding_languages: expect.any(Array),
+            // interests: expect.any(String),
+            host_rating: null,
+          });
         });
       });
   });
@@ -332,13 +323,12 @@ describe("GET /api/profiles/:id", () => {
           first_name: expect.any(String),
           last_name: expect.any(String),
           username: expect.any(String),
-          gender: expect.any(String),
-          avatar: expect.any(String),
-          location: expect.any(String),
           date_of_birth: expect.any(String),
+          location: expect.any(String),
+          avatar: expect.any(String),
           coding_languages: expect.any(Array),
           interests: expect.any(String),
-          host_ratings: expect.any(Number),
+          host_rating: null,
         });
       });
   });
@@ -366,19 +356,17 @@ describe("PATCH /api/profiles/:id", () => {
       .then(({ body }) => {
         const { profile } = body;
         expect(profile).toMatchObject({
-          user_id: expect.any(String),
           first_name: "Alex",
           last_name: "Lawrenceson",
           username: "glawrenceson0",
-          gender: "Male",
+          date_of_birth: "1985-07-18T00:00:00.000Z",
+          location: "London",
           avatar:
             "https://robohash.org/quisexpeditaimpedit.png?size=50x50&set=set1",
-          location: "Visoko",
-          date_of_birth: "2023-04-18T00:00:00.000Z",
+          bio: "Passionate JavaScript developer with a love for problem-solving. Enjoys playing guitar and hiking in spare time.",
           coding_languages: ["JavaScript"],
-          interests:
-            "est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu",
-          host_ratings: 0,
+          interests: "Loves playing guitar, hiking, and reading sci-fi novels.",
+          host_rating: null,
         });
       });
   });

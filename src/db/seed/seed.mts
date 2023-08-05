@@ -33,13 +33,12 @@ interface INewProfile {
   first_name: string;
   last_name: string;
   username: string;
-  gender: string;
-  avatar: string;
-  location: string;
   date_of_birth: string;
+  location: string;
+  avatar: string;
+  bio: string;
   coding_languages: string[];
   interests: string;
-  host_ratings: number;
 }
 
 const seed = () => {
@@ -58,10 +57,9 @@ const seed = () => {
     .then((data) => {
       console.log("Users collection created");
       sampleUserId = String(data[0]._id);
-      const modifiedProfiles = profilesData.map((profile) => {
+      const modifiedProfiles = profilesData.map((profile, index) => {
         const newProfile: INewProfile = { ...profile };
-        const userIdIndex = Math.floor(Math.random() * data.length);
-        newProfile.user_id = data[userIdIndex]._id;
+        newProfile.user_id = data[index]._id;
         return newProfile;
       });
       const modifiedEvents = eventsData.map((event) => {

@@ -33,12 +33,30 @@ const loginUser = (req: Request, res: Response) => {
   UserModel.findOne({ email })
     .then((user) => {
       if (!user) {
-        return res.status(401).send({ success: false, user_id: null });
+        return res.status(401).send({
+          success: false,
+          msg: "Invalid login details",
+          user_id: null,
+        });
       }
       if (user.password === password) {
-        res.status(200).send({ success: true, user_id: user._id });
+        console.log(user._id)
+        ProfileModel.findOne({ user_id: user._id }).then((profile) => {
+          res
+            .status(200)
+            .send({
+              success: true,
+              msg: "User logged in",
+              user_id: user._id,
+              profile_id: profile._id,
+            });
+        });
       } else {
-        res.status(401).send({ success: false, user_id: null });
+        res.status(401).send({
+          success: false,
+          msg: "Invalid login details",
+          user_id: null,
+        });
       }
     })
     .catch((err) => {
@@ -99,7 +117,7 @@ const createUser = (req: Request, res: Response) => {
         });
       }
       if (err.code === 11000 && err.keyValue.username) {
-        UserModel.findByIdAndDelete(newProfile.user_id)
+        UserModel.findByIdAndDelete(newProfile.user_id);
         return res.status(409).send({
           success: false,
           msg: "Username already in use",

@@ -1,19 +1,20 @@
 import { Request, Response } from "express";
-import { Types } from "mongoose";
+import { ObjectId, Types } from "mongoose";
 import { ProfileModel } from "../models/profiles.model.mjs";
 
 interface IReturnedProfiles {
-  _id: Types.ObjectId;
+  _id?: Types.ObjectId;
+  user_id: string;
   first_name: string;
   last_name: string;
   username: string;
-  gender: string;
-  avatar: string;
+  date_of_birth: Date;
   location: string;
-  date_of_birth: Date; // Change the data type to Date
+  avatar: string;
+  bio: string;
   coding_languages: string[];
   interests: string;
-  host_ratings: number;
+  host_rating: number;
 }
 
 const getProfiles = (req: Request, res: Response) =>
