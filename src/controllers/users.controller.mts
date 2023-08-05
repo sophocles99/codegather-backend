@@ -40,7 +40,6 @@ const loginUser = (req: Request, res: Response) => {
         });
       }
       if (user.password === password) {
-        console.log(user._id)
         ProfileModel.findOne({ user_id: user._id }).then((profile) => {
           res
             .status(200)
