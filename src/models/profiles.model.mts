@@ -1,8 +1,8 @@
-import mongoose, { Schema, ObjectId } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 import { UserModel } from "./users.model.mjs";
 
-interface IProfile {
-  user_id: ObjectId;
+export interface IProfile {
+  user_id: Types.ObjectId;
   first_name: string;
   last_name: string;
   username: string;
@@ -14,8 +14,9 @@ interface IProfile {
   interests: string;
   host_rating: number;
 }
-const ProfileSchema = new mongoose.Schema<IProfile>({
-  user_id: { type: Schema.ObjectId, ref: UserModel, required: true },
+
+const ProfileSchema = new Schema<IProfile>({
+  user_id: { type: Schema.Types.ObjectId, ref: UserModel, required: true },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   username: { type: String, required: true, unique: true },

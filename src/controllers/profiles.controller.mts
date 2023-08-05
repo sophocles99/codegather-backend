@@ -1,25 +1,10 @@
 import { Request, Response } from "express";
-import { ObjectId, Types } from "mongoose";
 import { ProfileModel } from "../models/profiles.model.mjs";
-
-interface IReturnedProfiles {
-  _id: ObjectId;
-  user_id: ObjectId;
-  first_name: string;
-  last_name: string;
-  username: string;
-  date_of_birth: Date;
-  location: string;
-  avatar: string;
-  bio: string;
-  coding_languages: string[];
-  interests: string;
-  host_rating: number;
-}
+import { IProfile } from "../models/profiles.model.mjs";
 
 const getProfiles = (req: Request, res: Response) =>
   ProfileModel.find()
-    .then((profiles) => {
+    .then((profiles: IProfile[]) => {
       res.status(200).send({ profiles });
     })
     .catch((err) => {
@@ -28,9 +13,9 @@ const getProfiles = (req: Request, res: Response) =>
     });
 
 const getProfileById = (req: Request, res: Response) => {
-  const { id } = req.params;
-  ProfileModel.findById(id.toString())
-    .then((profile) => {
+  const profileId = req.params.id;
+  ProfileModel.findById(profileId)
+    .then((profile: IProfile) => {
       res.status(200).send({ profile });
     })
     .catch((err) => {
@@ -45,7 +30,7 @@ const patchProfileById = (req: Request, res: Response) => {
     { _id: profileId },
     { ...profilePatches },
     { new: true }
-  ).then((profile) => {
+  ).then((profile: IProfile) => {
     res.status(200).send({ profile });
   });
 };
