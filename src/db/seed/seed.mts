@@ -12,6 +12,7 @@ import {
 import { UserModel } from "../../models/users.model.mjs";
 import { EventModel } from "../../models/events.model.mjs";
 import { ProfileModel } from "../../models/profiles.model.mjs";
+import { IProfile, IEvent } from "../../../types/interfaces.js";
 
 let sampleUserId = "";
 let sampleProfileId = "";
@@ -60,12 +61,12 @@ const seed = () => {
       console.log("Users collection created");
       sampleUserId = String(data[0]._id);
       const modifiedProfiles = profilesData.map((profile, index) => {
-        const newProfile: IProfileData = { ...profile };
+        const newProfile: IProfile = { ...profile };
         newProfile.user_id = data[index]._id;
         return newProfile;
       });
       const modifiedEvents = eventsData.map((event) => {
-        const newEvent: IEventData = { ...event };
+        const newEvent: IEvent = { ...event };
         const userIdIndex = Math.floor(Math.random() * data.length);
         newEvent.user_id = data[userIdIndex]._id;
         return newEvent;

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ProfileModel } from "../models/profiles.model.mjs";
-import { IProfile } from "../interfaces.mjs";
+import { IProfile } from "../../types/interfaces.js";
 
 const getProfiles = (req: Request, res: Response) =>
   ProfileModel.find()

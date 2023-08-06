@@ -3,7 +3,6 @@ import { EventModel } from "../models/events.model.mjs";
 
 const getEvents = (req: Request, res: Response) => {
   const topic: any = req.query.topic;
-
   EventModel.find()
     .then((events) => {
       if (topic) {

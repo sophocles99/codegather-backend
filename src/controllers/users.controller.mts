@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { UserModel } from "../models/users.model.mjs";
 import { ProfileModel } from "../models/profiles.model.mjs";
-import IUser from "../interfaces.mjs";
-import { IReturnedUsers, INewProfile } from "../interfaces.mjs";
+import { IUser, IProfile } from "../../types/interfaces.js";
 
 const loginUser = (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -17,14 +16,12 @@ const loginUser = (req: Request, res: Response) => {
       }
       if (user.password === password) {
         ProfileModel.findOne({ user_id: user._id }).then((profile) => {
-          res
-            .status(200)
-            .send({
-              success: true,
-              msg: "User logged in",
-              user_id: user._id,
-              profile_id: profile._id,
-            });
+          res.status(200).send({
+            success: true,
+            msg: "User logged in",
+            user_id: user._id,
+            profile_id: profile._id,
+          });
         });
       } else {
         res.status(401).send({
@@ -48,29 +45,27 @@ const createUser = (req: Request, res: Response) => {
     first_name,
     last_name,
     username,
-    gender,
     date_of_birth,
     location,
     avatar,
+    bio,
     coding_languages,
     interests,
-    host_ratings,
   } = user;
   const newUser: IUser = { email, password };
-  const newProfile: INewProfile = {
+  const newProfile: IProfile = {
     first_name,
     last_name,
     username,
-    gender,
     date_of_birth,
     location,
     avatar,
+    bio,
     coding_languages,
     interests,
-    host_ratings,
   };
   UserModel.create(newUser)
-    .then((data) => {
+    .then((data: IUser) => {
       newProfile.user_id = data._id;
       return ProfileModel.create(newProfile);
     })
@@ -106,7 +101,7 @@ const createUser = (req: Request, res: Response) => {
 
 const getUsers = (req: Request, res: Response) =>
   UserModel.find()
-    .then((users: IReturnedUsers[]) => {
+    .then((users: IUser[]) => {
       res.status(200).send({ users });
     })
     .catch((err) => {
