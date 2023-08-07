@@ -157,7 +157,7 @@ describe("GET /api/users", () => {
       .expect(200)
       .then(({ body }) => {
         const { users } = body;
-        expect(users).toHaveLength(22); // 20 users created in seed, 2 more added by above tests
+        expect(users).toHaveLength(21); // 20 users created in seed, 1 more added by above createuser test
         users.forEach((user) => {
           expect(user).toMatchObject({
             _id: expect.any(String),

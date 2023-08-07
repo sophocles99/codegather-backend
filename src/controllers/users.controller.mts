@@ -18,33 +18,46 @@ const createUser = (req: Request, res: Response) => {
     coding_languages,
     interests,
   } = user;
-  const newUser: IUser = { email, password };
-  const newProfile: IProfile = {
-    first_name,
-    last_name,
-    username,
-    date_of_birth,
-    location,
-    avatar,
-    bio,
-    coding_languages,
-    interests,
-  };
-  UserModel.create(newUser)
-    .then((data: IUser) => {
-      newProfile.user_id = data._id;
-      return ProfileModel.create(newProfile);
-    })
-    .then((data) => {
-      res.status(201).send({
-        success: true,
-        msg: "New user and profile created",
-        user_id: data.user_id,
-        profile_id: data._id,
+  UserModel.findOne({ email })
+    .then((user) => {
+      if (user) {
+        throw new Error("Email already in use");
+      }
+      return ProfileModel.findOne({ username }).then((profile) => {
+        if (profile) {
+          throw new Error("Username already in use");
+        }
       });
     })
+    .then(() => {
+      const newUser: IUser = { email, password };
+      const newProfile: IProfile = {
+        first_name,
+        last_name,
+        username,
+        date_of_birth,
+        location,
+        avatar,
+        bio,
+        coding_languages,
+        interests,
+      };
+      UserModel.create(newUser)
+        .then((data: IUser) => {
+          newProfile.user_id = data._id;
+          return ProfileModel.create(newProfile);
+        })
+        .then((data) => {
+          res.status(201).send({
+            success: true,
+            msg: "New user and profile created",
+            user_id: data.user_id,
+            profile_id: data._id,
+          });
+        });
+    })
     .catch((err) => {
-      if (err.code === 11000 && err.keyValue.email) {
+      if (err.message === "Email already in use") {
         return res.status(409).send({
           success: false,
           msg: "Email already in use",
@@ -52,8 +65,7 @@ const createUser = (req: Request, res: Response) => {
           profile_id: null,
         });
       }
-      if (err.code === 11000 && err.keyValue.username) {
-        UserModel.findByIdAndDelete(newProfile.user_id);
+      if (err.message === "Username already in use") {
         return res.status(409).send({
           success: false,
           msg: "Username already in use",
@@ -61,7 +73,8 @@ const createUser = (req: Request, res: Response) => {
           profile_id: null,
         });
       }
-      res.sendStatus(400);
+      console.log(err);
+      res.status(400).send({ success: false, msg: err });
     });
 };
 
