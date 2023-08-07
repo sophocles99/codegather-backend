@@ -9,19 +9,19 @@ export default {
     },
   },
 
-  "GET /api/sampleids": {
-    description: "responds with a list of topics",
-    request: null,
-    response: {
-      success: true,
-      msg: "List of endpoints",
-      sampleIds: {
-        user_id: "sampleUserId",
-        profile_id: "sampleProfileId",
-        event_id: "sampleEventId",
-      },
-    },
-  },
+  // "GET /api/sampleids": {
+  //   description: "responds with a list of topics",
+  //   request: null,
+  //   response: {
+  //     success: true,
+  //     msg: "List of endpoints",
+  //     sampleIds: {
+  //       user_id: "sampleUserId",
+  //       profile_id: "sampleProfileId",
+  //       event_id: "sampleEventId",
+  //     },
+  //   },
+  // },
 
   "POST /api/users/createuser": {
     description: "creates new user and profile documents in the database",
