@@ -71,8 +71,8 @@ describe("POST /api/users/createuser", () => {
   test("409: if email already in use, responds with {success: false, msg, user_id: null, profile_id: null}", () => {
     const testUser = {
       user: {
-        email: "bdominichetti0@histats.com",
-        password: "gO5(bnc\\rd",
+        email: "shosier1@liveinternet.ru",
+        password: "cI6#}6hO2S.",
         first_name: "Daniel",
         last_name: "Daniels",
         username: "whoTheDan",
@@ -123,8 +123,8 @@ describe("POST /api/users/createuser", () => {
 describe("POST /api/users/login", () => {
   test("200: for valid credentials, logs user in", () => {
     const testLogin = {
-      email: "shosier1@liveinternet.ru",
-      password: "cI6#}6hO2S.",
+      email: "fe@test.com",
+      password: "fe123456",
     };
     return request(app)
     .post("/api/users/login")

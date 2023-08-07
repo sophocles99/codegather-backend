@@ -1,5 +1,5 @@
 export default [
-  { email: "bdominichetti0@histats.com", password: "gO5(bnc\\rd" },
+  { email: "fe@test.com", password: "fe123456" },
   { email: "shosier1@liveinternet.ru", password: "cI6#}6hO2S." },
   { email: "ncovotto2@youtube.com", password: "sX8+(>PGI4nr_E{" },
   { email: "rprudham3@vkontakte.ru", password: "rB1(*obZ|{6jX&" },
