@@ -23,8 +23,6 @@ const createUser = (req: Request, res: Response) => {
       if (user) {
         throw new Error("Email already in use");
       }
-    })
-    .then(() => {
       return ProfileModel.findOne({ username }).then((profile) => {
         if (profile) {
           throw new Error("Username already in use");
