@@ -4,6 +4,9 @@
 get {{baseUrl}}/api
 
 ###
+get {{baseUrl}}/api/sampleids
+
+###
 get {{baseUrl}}/api/users
 
 ###

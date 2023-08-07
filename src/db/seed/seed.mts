@@ -94,7 +94,7 @@ const seed = () => {
 const __dirname = new URL(".", import.meta.url).pathname;
 
 seed().then((sampleIds) =>
-  writeFile(`${__dirname}sampleIds.json`, JSON.stringify(sampleIds))
+  writeFile(`${__dirname}sampleIds.js`, "export default " + JSON.stringify(sampleIds))
 );
 
 export default seed;
