@@ -23,9 +23,46 @@ export default {
     },
   },
 
-  "GET /api/users/:user_id": "responds with a single article by article_id",
+  "POST /api/users/createuser": {
+    description: "creates new user and profile documents in the database",
+    request: {
+      user: {
+        email: "danny@daniels.co.uk",
+        password: "DanStar123",
+        first_name: "Daniel",
+        last_name: "Daniels",
+        username: "whoTheDan",
+        date_of_birth: "1999-12-01",
+        location: "Stockport",
+        avatar: "Optional URL for avatar image",
+        bio: "Optional bio string up to 255 characaters",
+        coding_languages: ["Optional", "Array", "Of", "Coding", "Languages"],
+        interests: "Optional interests string up to 255 characters",
+      },
+      response: {
+        success: true,
+        msg: "New user and profile created",
+        user_id: "new user_id",
+        profile_id: "new profile_id",
+      },
+    },
+  },
 
-  "GET /api/profile": "responds with a list of articles",
+  "POST /api/users/login": {
+    description: "logs user in",
+    request: {
+      email: "user@login.com",
+      password: "userPassword123",
+    },
+    response: {
+      success: true,
+      msg: "User logged in",
+      user_id: "logged-in user_id",
+      profile_id: "logged-in profile_id",
+    },
+  },
+
+  "GET /api/profiles": "responds with a list of articles",
 
   "GET /api/events/:article_id/comments":
     "responds with a list of comments by article_id",

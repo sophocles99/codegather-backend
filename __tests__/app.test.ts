@@ -42,74 +42,6 @@ describe("GET /api/sampleids", () => {
   });
 });
 
-describe("GET /api/users", () => {
-  test("200: GET all users", () => {
-    return request(app)
-      .get("/api/users")
-      .expect(200)
-      .then(({ body }) => {
-        const { users } = body;
-        expect(users).toHaveLength(20);
-        users.forEach((user) => {
-          expect(user).toMatchObject({
-            _id: expect.any(String),
-            email: expect.any(String),
-            password: expect.any(String),
-            __v: expect.any(Number),
-          });
-        });
-      });
-  });
-});
-
-describe("POST /api/users/login", () => {
-  test("200: for valid credentials, responds with {success: true, msg, user_id, profile_id}", () => {
-    const testLogin = {
-      email: "shosier1@liveinternet.ru",
-      password: "cI6#}6hO2S.",
-    };
-    return request(app)
-      .post("/api/users/login")
-      .send(testLogin)
-      .expect(200)
-      .then(({ body }) => {
-        const { success, msg, user_id, profile_id } = body;
-        expect(success).toEqual(true);
-        expect(msg).toEqual("User logged in");
-        expect(user_id).toEqual(expect.any(String));
-        expect(profile_id).toEqual(expect.any(String));
-      });
-  });
-  test("401: for invalid email, responds with {success: false, user_id: null}", () => {
-    const testLogin = {
-      email: "shosier1@liveinternet.rX",
-      password: "cI6#}6hO2S.",
-    };
-    return request(app)
-      .post("/api/users/login")
-      .send(testLogin)
-      .expect(401)
-      .then(({ body }) => {
-        expect(body).toHaveProperty("success", false);
-        expect(body).toHaveProperty("user_id", null);
-      });
-  });
-  test("401: for valid email but invalid password, responds with {success: false, user_id: null}", () => {
-    const testLogin = {
-      email: "shosier1@liveinternet.ru",
-      password: "cI6#}6hOOOOOOO",
-    };
-    return request(app)
-      .post("/api/users/login")
-      .send(testLogin)
-      .expect(401)
-      .then(({ body }) => {
-        expect(body).toHaveProperty("success", false);
-        expect(body).toHaveProperty("user_id", null);
-      });
-  });
-});
-
 describe("POST /api/users/createuser", () => {
   test("201: for successfully created user and profile, responds with {success: true, msg, user_id, profile_id}", () => {
     const testUser = {
@@ -125,7 +57,7 @@ describe("POST /api/users/createuser", () => {
       },
     };
     return request(app)
-      .post("/api/users/createuser")
+    .post("/api/users/createuser")
       .send(testUser)
       .expect(201)
       .then(({ body }) => {
@@ -150,19 +82,19 @@ describe("POST /api/users/createuser", () => {
       },
     };
     return request(app)
-      .post("/api/users/createuser")
-      .send(testUser)
-      .expect(409)
-      .then(({ body }) => {
+    .post("/api/users/createuser")
+    .send(testUser)
+    .expect(409)
+    .then(({ body }) => {
         const { success, msg, user_id, profile_id } = body;
         expect(success).toEqual(false);
         expect(msg).toEqual("Email already in use");
         expect(user_id).toEqual(null);
         expect(profile_id).toEqual(null);
       });
-  });
-  test("409: if username already in use, responds with {success: false, msg, user_id: null, profile_id: null}", () => {
-    const testUser = {
+    });
+    test("409: if username already in use, responds with {success: false, msg, user_id: null, profile_id: null}", () => {
+      const testUser = {
       user: {
         email: "fred@frederick.com",
         password: "gOasdf^&",
@@ -175,21 +107,89 @@ describe("POST /api/users/createuser", () => {
       },
     };
     return request(app)
-      .post("/api/users/createuser")
-      .send(testUser)
-      .expect(409)
+    .post("/api/users/createuser")
+    .send(testUser)
+    .expect(409)
+    .then(({ body }) => {
+      const { success, msg, user_id, profile_id } = body;
+      expect(success).toEqual(false);
+      expect(msg).toEqual("Username already in use");
+      expect(user_id).toEqual(null);
+      expect(profile_id).toEqual(null);
+    });
+  });
+});
+
+describe("POST /api/users/login", () => {
+  test("200: for valid credentials, logs user in", () => {
+    const testLogin = {
+      email: "shosier1@liveinternet.ru",
+      password: "cI6#}6hO2S.",
+    };
+    return request(app)
+    .post("/api/users/login")
+    .send(testLogin)
+    .expect(200)
+    .then(({ body }) => {
+      const { success, msg, user_id, profile_id } = body;
+      expect(success).toEqual(true);
+      expect(msg).toEqual("User logged in");
+      expect(user_id).toEqual(expect.any(String));
+      expect(profile_id).toEqual(expect.any(String));
+    });
+  });
+  test("401: for invalid email, responds with {success: false, user_id: null}", () => {
+    const testLogin = {
+      email: "shosier1@liveinternet.rX",
+      password: "cI6#}6hO2S.",
+    };
+    return request(app)
+    .post("/api/users/login")
+      .send(testLogin)
+      .expect(401)
       .then(({ body }) => {
-        const { success, msg, user_id, profile_id } = body;
-        expect(success).toEqual(false);
-        expect(msg).toEqual("Username already in use");
-        expect(user_id).toEqual(null);
-        expect(profile_id).toEqual(null);
+        expect(body).toHaveProperty("success", false);
+        expect(body).toHaveProperty("user_id", null);
+      });
+  });
+  test("401: for valid email but invalid password, responds with {success: false, user_id: null}", () => {
+    const testLogin = {
+      email: "shosier1@liveinternet.ru",
+      password: "cI6#}6hOOOOOOO",
+    };
+    return request(app)
+      .post("/api/users/login")
+      .send(testLogin)
+      .expect(401)
+      .then(({ body }) => {
+        expect(body).toHaveProperty("success", false);
+        expect(body).toHaveProperty("user_id", null);
       });
   });
 });
 
-//Events testing...
+describe("GET /api/users", () => {
+  test("200: GET all users", () => {
+    return request(app)
+      .get("/api/users")
+      .expect(200)
+      .then(({ body }) => {
+        const { users } = body;
+        expect(users).toHaveLength(22); // 20 users created in seed, 2 more added by above tests
+        users.forEach((user) => {
+          expect(user).toMatchObject({
+            _id: expect.any(String),
+            email: expect.any(String),
+            password: expect.any(String),
+            __v: expect.any(Number),
+          });
+        });
+      });
+  });
+});
+
 describe("GET /api/events", () => {
+//Events testing...
   test("200: GET all events.", () => {
     return request(app)
       .get("/api/events")
