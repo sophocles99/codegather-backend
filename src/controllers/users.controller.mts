@@ -3,40 +3,6 @@ import { UserModel } from "../models/users.model.mjs";
 import { ProfileModel } from "../models/profiles.model.mjs";
 import { IUser, IProfile } from "../../types/interfaces.js";
 
-const loginUser = (req: Request, res: Response) => {
-  const { email, password } = req.body;
-  UserModel.findOne({ email })
-    .then((user) => {
-      if (!user) {
-        return res.status(401).send({
-          success: false,
-          msg: "Invalid login details",
-          user_id: null,
-        });
-      }
-      if (user.password === password) {
-        ProfileModel.findOne({ user_id: user._id }).then((profile) => {
-          res.status(200).send({
-            success: true,
-            msg: "User logged in",
-            user_id: user._id,
-            profile_id: profile._id,
-          });
-        });
-      } else {
-        res.status(401).send({
-          success: false,
-          msg: "Invalid login details",
-          user_id: null,
-        });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(400);
-    });
-};
-
 const createUser = (req: Request, res: Response) => {
   const { user } = req.body;
   const {
@@ -95,6 +61,40 @@ const createUser = (req: Request, res: Response) => {
           profile_id: null,
         });
       }
+      res.sendStatus(400);
+    });
+};
+
+const loginUser = (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  UserModel.findOne({ email })
+    .then((user) => {
+      if (!user) {
+        return res.status(401).send({
+          success: false,
+          msg: "Invalid login details",
+          user_id: null,
+        });
+      }
+      if (user.password === password) {
+        ProfileModel.findOne({ user_id: user._id }).then((profile) => {
+          res.status(200).send({
+            success: true,
+            msg: "User logged in",
+            user_id: user._id,
+            profile_id: profile._id,
+          });
+        });
+      } else {
+        res.status(401).send({
+          success: false,
+          msg: "Invalid login details",
+          user_id: null,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
       res.sendStatus(400);
     });
 };
