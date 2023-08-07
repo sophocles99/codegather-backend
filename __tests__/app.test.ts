@@ -24,6 +24,24 @@ describe("GET /api", () => {
   });
 });
 
+describe("GET /api/sampleids", () => {
+  test("200: responds with a list of sample ids for development purposes", () => {
+    return request(app)
+      .get("/api/sampleids")
+      .expect(200)
+      .then(({ body }) => {
+        const { success, msg, sample_ids } = body;
+        expect(success).toEqual(true);
+        expect(msg).toEqual("List of sample ids");
+        expect(sample_ids).toMatchObject({
+          sampleUserId: expect.any(String),
+          sampleProfileId: expect.any(String),
+          sampleEventId: expect.any(String)
+        })
+      });
+  });
+});
+
 describe("GET /api/users", () => {
   test("200: GET all users", () => {
     return request(app)
