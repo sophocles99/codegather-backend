@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 import { UserModel } from "./users.model.mjs";
 import { IProfile } from "../../types/interfaces.js";
 
-const ProfileSchema = new Schema<IProfile>({
+const profileSchema = new Schema<IProfile>({
   user_id: { type: Schema.Types.ObjectId, ref: UserModel, required: true },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
@@ -16,4 +16,4 @@ const ProfileSchema = new Schema<IProfile>({
   host_rating: { type: Number, default: null },
 });
 
-export const ProfileModel = model("Profile", ProfileSchema);
+export const ProfileModel = model("Profile", profileSchema);

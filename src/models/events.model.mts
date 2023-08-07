@@ -7,7 +7,7 @@ const LocationSchema = new Schema({
   long: { type: Number, required: true },
 });
 
-const EventSchema = new Schema<IEvent>({
+const eventSchema = new Schema<IEvent>({
   user_id: { type: Schema.ObjectId, ref: UserModel, required: true },
   event_title: { type: String, required: true },
   date_time: { type: Date, required: true },
@@ -19,4 +19,4 @@ const EventSchema = new Schema<IEvent>({
   description: { type: String, required: false },
 });
 
-export const EventModel = model("Event", EventSchema);
+export const EventModel = model("Event", eventSchema);

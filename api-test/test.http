@@ -12,15 +12,13 @@ Content-Type: application/json
 
 {
   "user": {
-    "email": "danny2@daniels.com",
-    "password": "t00nie",
+    "email": "danny27@daniels.com",
+    "password": "t00nie22",
     "first_name": "Tony",
     "last_name": "Daniels",
-    "username": "tdog21",
-    "gender": "not sure",
-    "avatar": "",
-    "location": "London",
+    "username": "tdog25",
     "date_of_birth": "1999-12-31",
+    "location": "London",
     "coding_languages": ["JavaScript", "TypeScript"],
     "interests": "Kung-Fu Panda",
     "host_ratings": 0

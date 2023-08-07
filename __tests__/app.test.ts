@@ -93,7 +93,7 @@ describe("POST /api/users/login", () => {
 });
 
 describe("POST /api/users/createuser", () => {
-  test("200: for successfully created user and profile, responds with {success: true, msg, user_id, profile_id}", () => {
+  test("201: for successfully created user and profile, responds with {success: true, msg, user_id, profile_id}", () => {
     const testUser = {
       user: {
         email: "danny@daniels.co.uk",
