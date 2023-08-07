@@ -38,10 +38,19 @@ delete {{baseUrl}}/api/users/64cc9b357d09898985457d7d
 get {{baseUrl}}/api/events
 
 ###
-get {{baseUrl}}/api/events/64ccb705ee5bbdb21111e379
+get {{baseUrl}}/api/events/64d0fc31eb8b08262669927c
 
 ###
 get {{baseUrl}}/api/events?topic=Innovation
 
 ###
+patch {{baseUrl}}/api/events/64d0fc31eb8b08262669927c
+Content-Type: application/json
+
+{
+  "profile_id": "64d0fc31eb8b082626699267"
+}
+
+###
 get {{baseUrl}}/api/profiles
+#

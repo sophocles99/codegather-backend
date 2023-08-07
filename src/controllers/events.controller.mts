@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { EventModel } from "../models/events.model.mjs";
+import { ProfileModel } from "../models/profiles.model.mjs";
 
 const getEvents = (req: Request, res: Response) => {
   const topic: any = req.query.topic;
@@ -55,4 +56,28 @@ const deleteEventById = (req: Request, res: Response) => {
     });
 };
 
-export { getEvents, getEventById, postEvent, deleteEventById };
+const updateEvent = (req: Request, res: Response) => {
+  const { event_id } = req.params;
+  const { profile_id } = req.body;
+
+  if(!profile_id) {
+      return res.status(400).send("Please go to your profile settings to change.");
+  }
+  ProfileModel.findById(profile_id)
+  .then(({_id}) => {
+    if(_id)
+      return EventModel.findById(event_id);
+  })
+  .then(event => {
+    event.attending.push(profile_id);
+    return event.save()
+  })
+  .then(()=> {
+    return res.status(201).send("Patched Successfully.")
+  })
+  .catch(error => {
+      console.log(error);
+      return res.sendStatus(400);
+  });
+}
+export { getEvents, getEventById, postEvent, deleteEventById, updateEvent };
