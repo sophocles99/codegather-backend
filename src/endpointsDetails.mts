@@ -6,6 +6,7 @@ export default {
     "POST login": "/api/users/login",
     "GET all users": "/api/users",
     "GET user by ID": "/api/users/:id",
+    "PATCH user by ID": "/api/users/:id",
     "DELETE user by ID": "/api/users/:id",
     "GET all profiles": "/api/profiles",
     "GET profile by ID": "/api/profiles/",
@@ -98,6 +99,28 @@ export default {
       email: "fe@test.com",
       password: "fe123456",
       __v: 0,
+    },
+  },
+
+  "PATCH /api/users/:id": {
+    baseUrl_example: "http://localhost:8000",
+    description: "Returns a success message with the updated user.",
+    queries: [],
+    exampleRequest: "PATCH {{baseUrl}}/api/users/:id",
+    ContentType: "application/json",
+      body: {user:{
+        email: "newEmail@test.com",
+        password: "newPasswordfe123456",
+      }},
+    exampleResponse: {
+      success: true,
+      msg: 'User updated',
+      user: {
+        _id: '64d262691c251983c64800d2',
+        email: 'newEmail@test.com',
+        password: 'newPasswordfe123456',
+        __v: 0
+      }
     },
   },
 
