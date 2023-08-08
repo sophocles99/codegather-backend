@@ -89,22 +89,25 @@ const loginUser = (req: Request, res: Response) => {
           user_id: null,
         });
       }
-      if (user.password === password) {
-        ProfileModel.findOne({ user_id: user._id }).then((profile) => {
-          res.status(200).send({
-            success: true,
-            msg: "User logged in",
-            user_id: user._id,
-            profile_id: profile._id,
+      user.comparePassword(password).then((result) => {
+        console.log("Result from comparePassword", result);
+        if (result) {
+          ProfileModel.findOne({ user_id: user._id }).then((profile) => {
+            res.status(200).send({
+              success: true,
+              msg: "User logged in",
+              user_id: user._id,
+              profile_id: profile._id,
+            });
           });
-        });
-      } else {
-        res.status(401).send({
-          success: false,
-          msg: "Invalid login details",
-          user_id: null,
-        });
-      }
+        } else {
+          res.status(401).send({
+            success: false,
+            msg: "Invalid login details",
+            user_id: null,
+          });
+        }
+      });
     })
     .catch((err) => {
       console.log(err);

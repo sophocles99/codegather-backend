@@ -6,7 +6,6 @@ get {{baseUrl}}/api
 ### GET sample IDs
 get {{baseUrl}}/api/sampleids
 
-
 ### USERS
 
 # GET all users
