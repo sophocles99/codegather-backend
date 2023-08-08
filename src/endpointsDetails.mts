@@ -228,10 +228,10 @@ export default {
     },
   },
 
-  ["GET /api/events"]: {
+  "GET /api/events": {
     baseUrl_example: "http://localhost:8000",
     description: "Serves a list of all events.",
-    queries: [],
+    queries: ["topic=Innovation"],
     exampleRequest: "get {{baseUrl}}/api/events",
     exampleResponse: {
       events: [
@@ -277,7 +277,7 @@ export default {
     },
   },
 
-  ["GET /api/events/:id"]: {
+  "GET /api/events/:id": {
     baseUrl_example: "http://localhost:8000",
     description: "Serves an event record matching the given ID.",
     queries: [],
@@ -305,60 +305,15 @@ export default {
     },
   },
 
-  ["GET /api/events?topic=Innovation"]: {
+  "PATCH /api/events/:event_id": {
     baseUrl_example: "http://localhost:8000",
-    description: "Serves a list of events record matching the given topic.",
-    queries: [],
-    exampleRequest: "get {{baseUrl}}/api/events?topic=Innovation",
-    exampleResponse: {
-      event: {
-        _id: "64d193c00f06b557f95793fe",
-        user_id: "64d193c00f06b557f95793d8",
-        event_title: "AI Summit Edinburgh",
-        date_time: "2023-03-04T18:00:00.000Z",
-        location: {
-          lat: 55.9533,
-          long: -3.1883,
-          _id: "64d193c00f06b557f95793ff",
-        },
-        size_limit: 70,
-        attending: [],
-        image:
-          "https://miro.medium.com/v2/resize:fit:1200/1*BPSx-c--z6r7tY29L19ukQ.png",
-        topics: ["Artificial Intelligence", "Machine Learning"],
-        description:
-          "AI Summit Edinburgh brings together experts in artificial intelligence and machine learning. Don't miss this evening event featuring cutting-edge research and industry insights.",
-        __v: 0,
-      },
-    },
-  },
-
-  ["PATCH /api/events/:id"]: {
-    baseUrl_example: "http://localhost:8000",
-    description: "Serves an updated event record matching the given ID.",
+    description: "Adds a profile_id to an array of attendees ('attending' field).",
     queries: [],
     exampleRequest: {
       patch: "patch {{baseUrl}}/api/events/64d193c00f06b557f95793fe",
       ContentType: "application/json",
       body: {
-        event: {
-          user_id: "64d193c00f06b557f95793d8",
-          event_title: "AI Summit Edinburgh",
-          date_time: "2023-03-04T18:00:00.000Z",
-          location: {
-            lat: 55.9533,
-            long: -3.1883,
-            _id: "64d193c00f06b557f95793ff",
-          },
-          size_limit: 70,
-          attending: [],
-          image:
-            "https://miro.medium.com/v2/resize:fit:1200/1*BPSx-c--z6r7tY29L19ukQ.png",
-          topics: ["Artificial Intelligence", "Machine Learning"],
-          description:
-            "AI Summit Edinburgh brings together experts in artificial intelligence and machine learning. Don't miss this evening event featuring cutting-edge research and industry insights.",
-          __v: 0,
-        },
+        "profile_id": "profile_id of a new attendee"
       },
     },
     exampleResponse: {
@@ -384,11 +339,11 @@ export default {
     },
   },
 
-  ["DELETE /api/events/:id"]: {
+  "DELETE /api/events/:id": {
     baseUrl_example: "http://localhost:8000",
-    description: "Deletes an event matching the given Event ID",
+    description: "Deletes an event matching the given Event ID.",
     queries: [],
-    exampleRequest: "get {{baseUrl}}/api/events/64d193c00f06b557f95793fe",
+    exampleRequest: "delete {{baseUrl}}/api/events/64d193c00f06b557f95793fe",
     exampleResponse: {
       _id: "64d193c00f06b557f95793fe",
       user_id: "64d193c00f06b557f95793d8",
@@ -410,7 +365,7 @@ export default {
     },
   },
 
-  ["POST /api/events/"]: {
+  "POST /api/events/": {
     baseUrl_example: "http://localhost:8000",
     description: "Creates a new event.",
     queries: [],
