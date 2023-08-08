@@ -60,24 +60,26 @@ const updateEvent = (req: Request, res: Response) => {
   const { event_id } = req.params;
   const { profile_id } = req.body;
 
-  if(!profile_id) {
-      return res.status(400).send("Please go to your profile settings to change.");
-  }
   ProfileModel.findById(profile_id)
   .then(({_id}) => {
     if(_id)
       return EventModel.findById(event_id);
   })
-  .then(event => {
-    event.attending.push(profile_id);
-    return event.save()
+  .then((event) => {
+    if(event.attending.includes(profile_id)) {
+      throw new Error("The user is already in the attending list.");
+    }else {
+      event.attending.push(profile_id);
+      return event.save();
+    }
   })
   .then(()=> {
-    return res.status(201).send("Patched Successfully.")
+    res.status(201).send("Patched Successfully.");
   })
   .catch(error => {
-      console.log(error);
-      return res.sendStatus(400);
+      if(error.message === "The user is already in the attending list.")
+        res.status(400).send("The user is already in the attending list.");
   });
 }
+
 export { getEvents, getEventById, postEvent, deleteEventById, updateEvent };

@@ -1,15 +1,18 @@
 @baseUrl = http://localhost:8000
 
-###
+### GET list of endpoints
 get {{baseUrl}}/api
 
-###
+### GET sample IDs
 get {{baseUrl}}/api/sampleids
 
-###
+
+### USERS
+
+# GET all users
 get {{baseUrl}}/api/users
 
-###
+### POST user
 post {{baseUrl}}/api/users/createuser
 Content-Type: application/json
 
@@ -28,22 +31,37 @@ Content-Type: application/json
   }
 }
 
-###
+### GET user by ID
 get {{baseUrl}}/api/users/64ccb705ee5bbdb21111e35a
 
-###
+### DELETE user by ID
 delete {{baseUrl}}/api/users/64cc9b357d09898985457d7d
 
-###
+
+### PROFILES
+
+# GET all profiles
+get {{baseUrl}}/api/profiles
+
+### GET profile by ID
+get {{baseUrl}}/api/profiles/:id
+
+### PATCH profile by ID
+patch {{baseUrl}}/api/profiles/:id
+
+
+### EVENTS
+
+# GET all events
 get {{baseUrl}}/api/events
 
-###
+### GET event by ID
 get {{baseUrl}}/api/events/64d0fc31eb8b08262669927c
 
-###
+### GET event by topic
 get {{baseUrl}}/api/events?topic=Innovation
 
-###
+### PATCH event by id
 patch {{baseUrl}}/api/events/64d0fc31eb8b08262669927c
 Content-Type: application/json
 
@@ -51,6 +69,31 @@ Content-Type: application/json
   "profile_id": "64d0fc31eb8b082626699267"
 }
 
-###
-get {{baseUrl}}/api/profiles
-#
+### DELETE event by ID
+delete {{baseUrl}}/api/events/64d0fc31eb8b08262669927c
+
+### POST event
+post {{baseUrl}}/events/
+Content-Type: application/json
+
+{
+  "event": {
+    "user_id": "64d0fc30eb8b082626699253",
+    "event_title": "CodeNinjas Manchester",
+    "date_time": "2023-07-09T19:00:00.000Z",
+    "location": {
+      "lat": 54.483959,
+      "long": -2.244644,
+      "_id": "64d0fc31eb8b08262669987d"
+    },
+    "size_limit": 60,
+    "attending": [],
+    "image": "https://i.natgeofe.com/n/7fef9761-077c-45d0-9cca-78a984b9d614/burmese-python_thumb_4x3.jpg",
+    "topics": [
+      "App Development",
+      "Data Structure"
+    ],
+    "description": "CodeNinjas Manchester is a must-attend event for app developers and data structuring enthusiasts. Join us for an evening packed with hands-on workshops and engaging talks.",
+    "__v": 4
+  }
+}
