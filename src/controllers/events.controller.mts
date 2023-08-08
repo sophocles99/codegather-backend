@@ -36,7 +36,11 @@ const postEvent = (req: Request, res: Response) => {
   const { event } = req.body;
   EventModel.create(event)
     .then((data) => {
-      res.status(200).json(data);
+      res.status(200).send({
+        "success": true,
+        "msg": "New event is created",
+        event_id: "64d1dc638918b130ae651066",
+      });
     })
     .catch((err) => {
       console.log(err);
