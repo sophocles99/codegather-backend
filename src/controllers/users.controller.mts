@@ -90,7 +90,6 @@ const loginUser = (req: Request, res: Response) => {
         });
       }
       user.comparePassword(password).then((result) => {
-        console.log("Result from comparePassword", result);
         if (result) {
           ProfileModel.findOne({ user_id: user._id }).then((profile) => {
             res.status(200).send({

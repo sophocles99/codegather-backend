@@ -1,8 +1,12 @@
 import bcrypt from "bcrypt";
-import { Model, Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 import { IUser } from "../../types/interfaces.js";
 
-const userSchema = new Schema<IUser>({
+interface IUserDocument extends IUser {
+  comparePassword(password: string): Promise<boolean>
+}
+
+const userSchema = new Schema<IUserDocument>({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 });

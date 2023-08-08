@@ -11,6 +11,15 @@ get {{baseUrl}}/api/sampleids
 # GET all users
 get {{baseUrl}}/api/users
 
+### POST users/login
+post {{baseUrl}}/api/users/login
+Content-Type: application/json
+
+{
+  "email": "fegg@test.com",
+  "password": "fe123456"
+}
+
 ### POST user
 post {{baseUrl}}/api/users/createuser
 Content-Type: application/json
@@ -55,17 +64,17 @@ patch {{baseUrl}}/api/profiles/:id
 get {{baseUrl}}/api/events
 
 ### GET event by ID
-get {{baseUrl}}/api/events/64d193c00f06b557f95793fe
+get {{baseUrl}}/api/events/64d22612539380ed62408ccb
 
 ### GET event by topic
 get {{baseUrl}}/api/events?topic=Innovation
 
 ### PATCH event by id
-patch {{baseUrl}}/api/events/64d0fc31eb8b08262669927c
+patch {{baseUrl}}/api/events/64d22612539380ed62408ccb
 Content-Type: application/json
 
 {
-  "profile_id": "64d0fc31eb8b082626699267"
+  "profile_id": "64d22612539380ed62408cb7"
 }
 
 ### DELETE event by ID
