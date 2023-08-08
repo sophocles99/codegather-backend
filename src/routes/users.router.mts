@@ -4,9 +4,9 @@ import { catchValidationErrors, validateCreateUser } from "../middleware/users.v
 
 const userRouter:Router = Router();
 
+userRouter.get("/", getUsers)
 userRouter.post("/createuser", validateCreateUser, catchValidationErrors, createUser)
 userRouter.post("/login", loginUser)
-userRouter.get("/", getUsers)
 userRouter.get("/:id", getUserById)
 userRouter.delete("/:id", deleteUserById)
 
