@@ -168,6 +168,27 @@ describe("GET /api/users", () => {
       });
   });
 });
+describe("PATCH /api/users/:id", ()=> {
+  test("200: returns updated user", () => {
+    const testPatch = {user:{
+      email: "newEmail@test.com",
+      password: "newPasswordfe123456",
+    }};
+    return request(app)
+    .patch(`/api/users/${sampleUserId}`)
+    .send(testPatch)
+    .expect(200)
+    .then(({ body }) => {
+      const { success, msg, user } = body;
+      expect(success).toEqual(true);
+      expect(msg).toEqual("User updated");
+      expect(user).toMatchObject({
+        email: "newEmail@test.com",
+        password: expect.any(String),
+      });
+    });
+  });
+})
 
 describe("GET /api/events", () => {
 //Events testing...
