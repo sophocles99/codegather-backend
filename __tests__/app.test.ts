@@ -2,8 +2,7 @@ import request from "supertest";
 import app from "../dist/app.mjs";
 import db from "../dist/db/connection.mjs";
 import sampleIds from "../dist/db/seed/sampleIds.js";
-import endpointsList from "../dist/endpointsList.mjs";
-
+import endpointsDetails from "../dist/endpointsDetails.mjs";
 const { sampleUserId, sampleProfileId, sampleEventId } = sampleIds;
 
 afterAll(() => {
@@ -19,7 +18,7 @@ describe("GET /api", () => {
         const { success, msg, endpoints } = body;
         expect(success).toEqual(true);
         expect(msg).toEqual("List of endpoints");
-        expect(endpoints).toEqual(endpointsList);
+        expect(endpoints).toEqual(endpointsDetails);
       });
   });
 });
