@@ -1,7 +1,17 @@
 import mongoose from "mongoose";
+import { URL } from "url";
 import dotenv from "dotenv";
 
-dotenv.config();
+const __dirname = new URL(".", import.meta.url).pathname;
+const ENV = process.env.NODE_ENV || "development";
+
+dotenv.config({
+  path: `${__dirname}/../../.env.${ENV}`,
+});
+
+if (!process.env.MONGO_URI) {
+  throw new Error("MONGO_URI not set");
+}
 
 const connectionString: string = process.env.MONGO_URI;
 

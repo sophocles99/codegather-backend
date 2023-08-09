@@ -7,7 +7,7 @@ import {
   usersData,
   eventsData,
   profilesData,
-} from "../data/developement/index.mjs";
+} from "../data/development/index.mjs";
 
 import { UserModel } from "../../models/users.model.mjs";
 import { EventModel } from "../../models/events.model.mjs";
