@@ -3,6 +3,7 @@ import app from "../dist/app.mjs";
 import db from "../dist/db/connection.mjs";
 import sampleIds from "../dist/db/seed/sampleIds.js";
 import endpointsDetails from "../dist/endpointsDetails.mjs";
+
 const { sampleUserId, sampleProfileId, sampleEventId } = sampleIds;
 
 afterAll(() => {
@@ -385,3 +386,15 @@ describe("PATCH /api/:event_id", () => {
       });
   });
 });
+
+describe("POST /api/events/:id/signup", () => {
+  test("201: for successfully sending an email", () => {
+    return request(app)
+    .post(`/api/events/${sampleEventId}/signup`)    
+      .expect(201)
+      .then(({ body }) => {
+        console.log(body)
+        expect(body.msg).toEqual('Confirmation email sent successfully')
+      });
+  });
+})
