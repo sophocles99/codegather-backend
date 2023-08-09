@@ -140,21 +140,37 @@ const patchUserById = (req: Request, res: Response) => {
   const { id } = req.params;
   const { user } = req.body;
   const { email, password } = user;
-  const update:{email?: string, password?: string} = {};
-  if(email) update.email = email;
-  if(password) update.password = password;
-  if(!update.hasOwnProperty('email') && !update.hasOwnProperty('password')){
-    return res.status(400).send({success: false, msg: "Patch req must contain either email or a password to change."});
+  console.log(id, user, email, password)
+  if (!email && !password) {
+    return res.status(400).send({
+      success: false,
+      msg: "Patch req must contain email and/or password",
+    });
   }
-  UserModel.findByIdAndUpdate(id, update, {new: true})
-  .then(userFound => {
-    return res.status(200).send({success: true, msg: "User updated", user: userFound});
-  })
-  .catch(e=> {
-    console.log(e);
-    return res.status(400).send({success: false, msg: e.message});
-  });
-}
+  const update: { email?: string; password?: string } = {};
+  if (email) update.email = email;
+  if (password) update.password = password;
+  UserModel.findById(id)
+    .then((userFound) => {
+      console.log(userFound)
+      if (email) {
+        userFound.email = email;
+      }
+      if (password) {
+        userFound.password = password;
+      }
+      return userFound.save();
+    })
+    .then((userUpdated) => {
+      return res
+        .status(200)
+        .send({ success: true, msg: "User updated", user: userUpdated });
+    })
+    .catch((e) => {
+      console.log(e);
+      return res.status(400).send({ success: false, msg: e.message });
+    });
+};
 
 const deleteUserById = (req: Request, res: Response) => {
   const { id } = req.params;
@@ -168,4 +184,11 @@ const deleteUserById = (req: Request, res: Response) => {
     });
 };
 
-export { loginUser, createUser, getUsers, getUserById, deleteUserById, patchUserById };
+export {
+  loginUser,
+  createUser,
+  getUsers,
+  getUserById,
+  deleteUserById,
+  patchUserById,
+};

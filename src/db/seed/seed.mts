@@ -18,7 +18,6 @@ let sampleUserId = "";
 let sampleProfileId = "";
 let sampleEventId = "";
 
-
 interface IProfileData {
   user_id?: Types.ObjectId; //mongoose.Types.ObjectId - different from mongoose.ObjectId and mongoose.Schema.Types.ObjectId
   first_name: string;
@@ -57,32 +56,32 @@ const seed = () => {
     .then(() => {
       return UserModel.insertMany(usersData);
     })
-    .then((data) => {
+    .then((newUsers) => {
       console.log("Users collection created");
-      sampleUserId = String(data[0]._id);
+      sampleUserId = String(newUsers[0]._id);
       const modifiedProfiles = profilesData.map((profile, index) => {
         const newProfile: IProfile = { ...profile };
-        newProfile.user_id = data[index]._id;
+        newProfile.user_id = newUsers[index]._id;
         return newProfile;
       });
+      return ProfileModel.insertMany(modifiedProfiles);
+    })
+    .then((newProfiles) => {
+      console.log("Profiles collection created");
+      sampleProfileId = String(newProfiles[0]._id);
       const modifiedEvents = eventsData.map((event) => {
         const newEvent: IEvent = { ...event };
-        const userIdIndex = Math.floor(Math.random() * data.length);
-        newEvent.user_id = data[userIdIndex]._id;
+        const profileIdIndex = Math.floor(Math.random() * newProfiles.length);
+        newEvent.profile_id = newProfiles[profileIdIndex]._id;
         return newEvent;
       });
-      return Promise.all([
-        ProfileModel.insertMany(modifiedProfiles).then(
-          (data) => (sampleProfileId = String(data[0]._id))
-        ),
-        EventModel.insertMany(modifiedEvents).then(
-          (data) => (sampleEventId = String(data[0]._id))
-        ),
-      ]);
+      return EventModel.insertMany(modifiedEvents);
+    })
+    .then((newEvents) => {
+      console.log("Events collection created\n");
+      sampleEventId = String(newEvents[0]._id);
     })
     .then(() => {
-      console.log("Profiles collection created");
-      console.log("Events collection created\n");
       db.close();
       return { sampleUserId, sampleProfileId, sampleEventId };
     })
@@ -94,7 +93,10 @@ const seed = () => {
 const __dirname = new URL(".", import.meta.url).pathname;
 
 seed().then((sampleIds) =>
-  writeFile(`${__dirname}sampleIds.js`, "export default " + JSON.stringify(sampleIds))
+  writeFile(
+    `${__dirname}sampleIds.js`,
+    "export default " + JSON.stringify(sampleIds)
+  )
 );
 
 export default seed;

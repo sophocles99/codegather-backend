@@ -52,7 +52,7 @@ delete {{baseUrl}}/api/users/64d193c00f06b557f95793d1
 get {{baseUrl}}/api/profiles
 
 ### GET profile by ID
-get {{baseUrl}}/api/profiles/64d193c00f06b557f95793e6
+get {{baseUrl}}/api/profiles/64d3e7e8bdfd492a38ead53a
 
 ### PATCH profile by ID
 patch {{baseUrl}}/api/profiles/:id

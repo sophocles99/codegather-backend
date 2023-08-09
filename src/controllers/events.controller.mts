@@ -26,7 +26,7 @@ const getEvents = (req: Request, res: Response) => {
 
 const getEventById = (req: Request, res: Response) => {
   const { id } = req.params;
-  EventModel.findById(id.toString())
+  EventModel.findById(id)
     .then((event) => {
       res.status(200).send({ event });
     })
@@ -115,7 +115,10 @@ const postConfirmationEmail = async (req: Request, res: Response) => {
     if (!event) {
       return res.status(404).json({ error: "Event not found" });
     }
-    UserModel.findById(event.user_id)
+    ProfileModel.findById(event.profile_id)
+      .then((profile) => {
+        return UserModel.findById(profile.user_id);
+      })
       .then((user) => {
         const { email } = user;
         let transporter = nodemailer.createTransport(config);
