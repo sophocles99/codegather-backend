@@ -108,19 +108,21 @@ export default {
     queries: [],
     exampleRequest: "PATCH {{baseUrl}}/api/users/:id",
     ContentType: "application/json",
-      body: {user:{
+    body: {
+      user: {
         email: "newEmail@test.com",
         password: "newPasswordfe123456",
-      }},
+      },
+    },
     exampleResponse: {
       success: true,
-      msg: 'User updated',
+      msg: "User updated",
       user: {
-        _id: '64d262691c251983c64800d2',
-        email: 'newEmail@test.com',
-        password: 'newPasswordfe123456',
-        __v: 0
-      }
+        _id: "64d262691c251983c64800d2",
+        email: "newEmail@test.com",
+        password: "newPasswordfe123456",
+        __v: 0,
+      },
     },
   },
 
@@ -207,13 +209,14 @@ export default {
 
   "PATCH /api/profiles/:id": {
     baseUrl_example: "http://localhost:8000",
-    description: "Updates profile record matching the given ID using the given fields.",
+    description:
+      "Updates profile record matching the given ID using the given fields.",
     queries: [],
     exampleRequest: {
       patch: "patch {{baseUrl}}/api/profiles/64d193c00f06b557f95793e6",
       ContentType: "application/json",
       body: {
-        profile: {
+        profilePatches: {
           _id: "64d193c00f06b557f95793e6",
           user_id: "64d193c00f06b557f95793d1",
           first_name: "Alex",
@@ -260,7 +263,7 @@ export default {
       events: [
         {
           _id: "64d193c00f06b557f95793fa",
-          user_id: "64d193c00f06b557f95793d9",
+          profile: { profileObject: "a complete profile object" },
           event_title: "TechXpo London",
           date_time: "2023-09-27T18:30:00.000Z",
           location: {
@@ -279,7 +282,7 @@ export default {
         },
         {
           _id: "64d193c00f06b557f95793fc",
-          user_id: "64d193c00f06b557f95793de",
+          profile: { profileObject: "a complete profile object" },
           event_title: "CodeFest Manchester",
           date_time: "2023-06-09T19:00:00.000Z",
           location: {
@@ -308,7 +311,7 @@ export default {
     exampleResponse: {
       event: {
         _id: "64d193c00f06b557f95793fe",
-        user_id: "64d193c00f06b557f95793d8",
+        profile: { profileObject: "a complete profile object" },
         event_title: "AI Summit Edinburgh",
         date_time: "2023-03-04T18:00:00.000Z",
         location: {
@@ -330,13 +333,14 @@ export default {
 
   "PATCH /api/events/:event_id": {
     baseUrl_example: "http://localhost:8000",
-    description: "Adds a profile_id to an array of attendees ('attending' field).",
+    description:
+      "Adds a profile_id to an array of attendees ('attending' field).",
     queries: [],
     exampleRequest: {
       patch: "patch {{baseUrl}}/api/events/64d193c00f06b557f95793fe",
       ContentType: "application/json",
       body: {
-        "profile_id": "profile_id of a new attendee"
+        profile_id: "profile_id of a new attendee",
       },
     },
     exampleResponse: {
@@ -369,7 +373,7 @@ export default {
     exampleRequest: "delete {{baseUrl}}/api/events/64d193c00f06b557f95793fe",
     exampleResponse: {
       _id: "64d193c00f06b557f95793fe",
-      user_id: "64d193c00f06b557f95793d8",
+      profile: "64d193c00f06b557f95793d8",
       event_title: "AI Summit Edinburgh",
       date_time: "2023-03-04T18:00:00.000Z",
       location: {
@@ -397,7 +401,7 @@ export default {
       ContentType: "application/json",
       body: {
         event: {
-          user_id: "64d0fc30eb8b082626699253",
+          profile: "64d0fc30eb8b082626699253",
           event_title: "CodeNinjas Manchester",
           date_time: "2023-07-09T19:00:00.000Z",
           location: {

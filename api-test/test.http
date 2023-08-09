@@ -70,11 +70,11 @@ get {{baseUrl}}/api/events/64d22612539380ed62408ccb
 get {{baseUrl}}/api/events?topic=Innovation
 
 ### PATCH event by id
-patch {{baseUrl}}/api/events/64d22612539380ed62408ccb
+patch {{baseUrl}}/api/events/64d3f61450f5da8502375bb8
 Content-Type: application/json
 
 {
-  "profile_id": "64d22612539380ed62408cb7"
+  "profile_id": "64d3f61450f5da8502375b9b"
 }
 
 ### DELETE event by ID

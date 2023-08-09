@@ -140,7 +140,6 @@ const patchUserById = (req: Request, res: Response) => {
   const { id } = req.params;
   const { user } = req.body;
   const { email, password } = user;
-  console.log(id, user, email, password)
   if (!email && !password) {
     return res.status(400).send({
       success: false,
@@ -152,7 +151,6 @@ const patchUserById = (req: Request, res: Response) => {
   if (password) update.password = password;
   UserModel.findById(id)
     .then((userFound) => {
-      console.log(userFound)
       if (email) {
         userFound.email = email;
       }
