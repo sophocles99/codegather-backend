@@ -2,7 +2,7 @@ import request from "supertest";
 import app from "../dist/app.mjs";
 import db from "../dist/db/connection.mjs";
 import sampleIds from "../dist/db/seed/sampleIds.js";
-import endpointsDetails from "../dist/db/data/endpointsDetails.mjs";
+import endpointsDetails from "../dist/endpointsDetails.mjs";
 
 const { sampleUserId, sampleProfileId, sampleEventId } = sampleIds;
 
@@ -39,7 +39,7 @@ describe("POST /api/users/createuser", () => {
       },
     };
     return request(app)
-    .post("/api/users/createuser")
+      .post("/api/users/createuser")
       .send(testUser)
       .expect(201)
       .then(({ body }) => {
@@ -64,19 +64,19 @@ describe("POST /api/users/createuser", () => {
       },
     };
     return request(app)
-    .post("/api/users/createuser")
-    .send(testUser)
-    .expect(409)
-    .then(({ body }) => {
+      .post("/api/users/createuser")
+      .send(testUser)
+      .expect(409)
+      .then(({ body }) => {
         const { success, msg, user_id, profile_id } = body;
         expect(success).toEqual(false);
         expect(msg).toEqual("Email already in use");
         expect(user_id).toEqual(null);
         expect(profile_id).toEqual(null);
       });
-    });
-    test("409: if username already in use, responds with {success: false, msg, user_id: null, profile_id: null}", () => {
-      const testUser = {
+  });
+  test("409: if username already in use, responds with {success: false, msg, user_id: null, profile_id: null}", () => {
+    const testUser = {
       user: {
         email: "fred@frederick.com",
         password: "gOasdf^&",
@@ -89,16 +89,16 @@ describe("POST /api/users/createuser", () => {
       },
     };
     return request(app)
-    .post("/api/users/createuser")
-    .send(testUser)
-    .expect(409)
-    .then(({ body }) => {
-      const { success, msg, user_id, profile_id } = body;
-      expect(success).toEqual(false);
-      expect(msg).toEqual("Username already in use");
-      expect(user_id).toEqual(null);
-      expect(profile_id).toEqual(null);
-    });
+      .post("/api/users/createuser")
+      .send(testUser)
+      .expect(409)
+      .then(({ body }) => {
+        const { success, msg, user_id, profile_id } = body;
+        expect(success).toEqual(false);
+        expect(msg).toEqual("Username already in use");
+        expect(user_id).toEqual(null);
+        expect(profile_id).toEqual(null);
+      });
   });
 });
 
@@ -109,16 +109,16 @@ describe("POST /api/users/login", () => {
       password: "fe123456",
     };
     return request(app)
-    .post("/api/users/login")
-    .send(testLogin)
-    .expect(200)
-    .then(({ body }) => {
-      const { success, msg, user_id, profile_id } = body;
-      expect(success).toEqual(true);
-      expect(msg).toEqual("User logged in");
-      expect(user_id).toEqual(expect.any(String));
-      expect(profile_id).toEqual(expect.any(String));
-    });
+      .post("/api/users/login")
+      .send(testLogin)
+      .expect(200)
+      .then(({ body }) => {
+        const { success, msg, user_id, profile_id } = body;
+        expect(success).toEqual(true);
+        expect(msg).toEqual("User logged in");
+        expect(user_id).toEqual(expect.any(String));
+        expect(profile_id).toEqual(expect.any(String));
+      });
   });
   test("401: for invalid email, responds with {success: false, user_id: null}", () => {
     const testLogin = {
@@ -126,7 +126,7 @@ describe("POST /api/users/login", () => {
       password: "cI6#}6hO2S.",
     };
     return request(app)
-    .post("/api/users/login")
+      .post("/api/users/login")
       .send(testLogin)
       .expect(401)
       .then(({ body }) => {
@@ -169,9 +169,32 @@ describe("GET /api/users", () => {
       });
   });
 });
+describe("PATCH /api/users/:id", () => {
+  test("200: returns updated user", () => {
+    const testPatch = {
+      user: {
+        email: "newEmail@test.com",
+        password: "newPasswordfe123456",
+      },
+    };
+    return request(app)
+      .patch(`/api/users/${sampleUserId}`)
+      .send(testPatch)
+      .expect(200)
+      .then(({ body }) => {
+        const { success, msg, user } = body;
+        expect(success).toEqual(true);
+        expect(msg).toEqual("User updated");
+        expect(user).toMatchObject({
+          email: "newEmail@test.com",
+          password: expect.any(String),
+        });
+      });
+  });
+});
 
 describe("GET /api/events", () => {
-//Events testing...
+  //Events testing...
   test("200: GET all events.", () => {
     return request(app)
       .get("/api/events")
@@ -233,7 +256,6 @@ describe("GET /api/events/:event_id", () => {
 //GET events by topics field
 describe("GET /api/events?topic=Innovation", () => {
   test("200: GET all events filtered by the given topic.", () => {
-
     return request(app)
       .get("/api/events?topic=Innovation")
       .expect(200)
@@ -345,20 +367,32 @@ describe("PATCH /api/profiles/:id", () => {
       });
   });
 });
+
+describe("PATCH /api/:event_id", () => {
+  test("200: responds with new event array with added profile id ", () => {
+    const testProfile = {
+      profile_id: sampleProfileId,
+    };
+    return request(app)
+      .patch(`/api/events/${sampleEventId}`)
+      .send(testProfile)
+      .expect(200)
+      .then(({ body }) => {
+        expect(body).toMatchObject({
+          success: true,
+          msg: "Profile ID add to event Array",
+          event_id: sampleEventId,
+        });
+      });
+  });
+});
+
 describe("POST /api/events/:id/signup", () => {
   test("201: for successfully sending an email", () => {
-
-    
     return request(app)
-    .post(`/api/events/${sampleEventId}/signup`)
-      
+    .post(`/api/events/${sampleEventId}/signup`)    
       .expect(201)
       .then(({ body }) => {
-        // const { success, msg, user_id, profile_id } = body;
-        // expect(success).toEqual(true);
-        // expect(msg).toEqual("New user and profile created");
-        // expect(user_id).toEqual(expect.any(String));
-        // expect(profile_id).toEqual(expect.any(String));
         console.log(body)
         expect(body.msg).toEqual('Confirmation email sent successfully')
       });

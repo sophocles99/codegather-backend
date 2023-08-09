@@ -3,7 +3,7 @@ import { userRouter } from "./users.router.mjs";
 import { eventRouter } from "./events.router.mjs";
 import { profileRouter } from "./profiles.router.mjs";
 import getApi from "../controllers/api.controller.mjs";
-import "../db/data/developement/endpointsDetails.mjs";
+import "../endpointsDetails.mjs";
 
 const apiRouter: Router = Router();
 

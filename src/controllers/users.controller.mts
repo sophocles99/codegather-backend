@@ -89,22 +89,24 @@ const loginUser = (req: Request, res: Response) => {
           user_id: null,
         });
       }
-      if (user.password === password) {
-        ProfileModel.findOne({ user_id: user._id }).then((profile) => {
-          res.status(200).send({
-            success: true,
-            msg: "User logged in",
-            user_id: user._id,
-            profile_id: profile._id,
+      user.comparePassword(password).then((result) => {
+        if (result) {
+          ProfileModel.findOne({ user_id: user._id }).then((profile) => {
+            res.status(200).send({
+              success: true,
+              msg: "User logged in",
+              user_id: user._id,
+              profile_id: profile._id,
+            });
           });
-        });
-      } else {
-        res.status(401).send({
-          success: false,
-          msg: "Invalid login details",
-          user_id: null,
-        });
-      }
+        } else {
+          res.status(401).send({
+            success: false,
+            msg: "Invalid login details",
+            user_id: null,
+          });
+        }
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -134,6 +136,26 @@ const getUserById = (req: Request, res: Response) => {
     });
 };
 
+const patchUserById = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { user } = req.body;
+  const { email, password } = user;
+  const update:{email?: string, password?: string} = {};
+  if(email) update.email = email;
+  if(password) update.password = password;
+  if(!update.hasOwnProperty('email') && !update.hasOwnProperty('password')){
+    return res.status(400).send({success: false, msg: "Patch req must contain either email or a password to change."});
+  }
+  UserModel.findByIdAndUpdate(id, update, {new: true})
+  .then(userFound => {
+    return res.status(200).send({success: true, msg: "User updated", user: userFound});
+  })
+  .catch(e=> {
+    console.log(e);
+    return res.status(400).send({success: false, msg: e.message});
+  });
+}
+
 const deleteUserById = (req: Request, res: Response) => {
   const { id } = req.params;
   UserModel.findOneAndDelete({ _id: id })
@@ -146,4 +168,4 @@ const deleteUserById = (req: Request, res: Response) => {
     });
 };
 
-export { loginUser, createUser, getUsers, getUserById, deleteUserById };
+export { loginUser, createUser, getUsers, getUserById, deleteUserById, patchUserById };

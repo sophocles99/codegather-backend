@@ -39,11 +39,11 @@ const getEventById = (req: Request, res: Response) => {
 const postEvent = (req: Request, res: Response) => {
   const { event } = req.body;
   EventModel.create(event)
-    .then((data) => {
+    .then((event) => {
       res.status(200).send({
         "success": true,
         "msg": "New event is created",
-        event_id: "64d1dc638918b130ae651066",
+        event_id: event._id,
       });
     })
     .catch((err) => {
@@ -69,11 +69,14 @@ const updateEvent = (req: Request, res: Response) => {
   const { profile_id } = req.body;
 
   ProfileModel.findById(profile_id)
-  .then(({_id}) => {
-    if(_id)
+  .then((profile) => {
+    if(!profile)
+    {throw new Error("Profile not found");}
       return EventModel.findById(event_id);
   })
   .then((event) => {
+    if(!event)
+    {throw new Error("Event not found");}
     if(event.attending.includes(profile_id)) {
       throw new Error("The user is already in the attending list.");
     }else {
@@ -81,12 +84,19 @@ const updateEvent = (req: Request, res: Response) => {
       return event.save();
     }
   })
-  .then(()=> {
-    res.status(201).send("Patched Successfully.");
+  .then((event)=> {
+    res.status(200).send({
+      success: true,
+      msg: "Profile_id added to event attending array",
+      event_id: event._id,
+    });
   })
   .catch(error => {
-      if(error.message === "The user is already in the attending list.")
-        res.status(400).send("The user is already in the attending list.");
+      console.log(error.message)
+        res.status(400).send({
+          success: false,
+      msg: error.message,
+        });
   });
 }
 
