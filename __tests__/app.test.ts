@@ -380,7 +380,7 @@ describe("PATCH /api/:event_id", () => {
       .then(({ body }) => {
         expect(body).toMatchObject({
           success: true,
-          msg: "Profile ID add to event Array",
+          msg: "Profile_id added to event attending array",
           event_id: sampleEventId,
         });
       });
@@ -393,7 +393,6 @@ describe("POST /api/events/:id/signup", () => {
     .post(`/api/events/${sampleEventId}/signup`)    
       .expect(201)
       .then(({ body }) => {
-        console.log(body)
         expect(body.msg).toEqual('Confirmation email sent successfully')
       });
   });
