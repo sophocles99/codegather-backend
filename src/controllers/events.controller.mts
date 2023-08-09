@@ -35,11 +35,11 @@ const getEventById = (req: Request, res: Response) => {
 const postEvent = (req: Request, res: Response) => {
   const { event } = req.body;
   EventModel.create(event)
-    .then((data) => {
+    .then((event) => {
       res.status(200).send({
         "success": true,
         "msg": "New event is created",
-        event_id: "64d1dc638918b130ae651066",
+        event_id: event._id,
       });
     })
     .catch((err) => {
@@ -83,7 +83,7 @@ const updateEvent = (req: Request, res: Response) => {
   .then((event)=> {
     res.status(200).send({
       success: true,
-      msg: "Profile ID add to event Array",
+      msg: "Profile_id added to event attending array",
       event_id: event._id,
     });
   })
