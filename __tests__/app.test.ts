@@ -365,3 +365,24 @@ describe("PATCH /api/profiles/:id", () => {
       });
   });
 });
+
+
+
+describe("PATCH /api/:event_id", () => {
+  test("200: responds with new event array with added profile id ", () => {
+    const testProfile = {
+     profile_id:sampleProfileId
+    };
+    return request(app)
+      .patch(`/api/events/${sampleEventId}`)
+      .send(testProfile)
+      .expect(200)
+      .then(({ body }) => {
+        expect(body).toMatchObject({
+          success: true,
+          msg: "Profile ID add to event Array",
+          event_id: sampleEventId,
+        });
+      });
+  });
+});
