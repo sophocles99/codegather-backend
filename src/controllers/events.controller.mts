@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { EventModel } from "../models/events.model.mjs";
 import { ProfileModel } from "../models/profiles.model.mjs";
+import * as nodemailer from 'nodemailer';
+import { UserModel } from "../models/users.model.mjs";
+// import { EMAIL, PASSWORD } from '../env.js';
+
 
 const getEvents = (req: Request, res: Response) => {
   const topic: any = req.query.topic;
@@ -86,4 +90,98 @@ const updateEvent = (req: Request, res: Response) => {
   });
 }
 
-export { getEvents, getEventById, postEvent, deleteEventById, updateEvent };
+const postConfirmationEmail = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  let config = {
+    service : 'gmail',
+    auth : {
+        user: "codegather101@gmail.com",
+        pass: "iqtgnawlhpicgxdi"
+    }
+}
+// let transporter = nodemailer.createTransport(config)
+  // nodemailer.createTestAccount()
+  // .then((testAccount) => {
+  //     console.log(req.params);
+      
+
+      // Find the event by its ID
+      EventModel.findById(id)
+          .then((event) => {
+            console.log(event)
+              if (!event) {
+                  return res.status(404).json({ error: "Event not found" });
+              }
+              UserModel.findById(event.user_id).then((user) =>{
+                  console.log(user, 'in usermodel')
+                  const { email } = user
+                  // Create a transporter using Ethereal SMTP settings
+                  let transporter = nodemailer.createTransport(config)
+                  // Compose the email message codegather101@gmail.com
+                  const message = {
+                    from: "codegather101@gmail.com",
+                    to: email,
+                    subject: "Event Registration Confirmation",
+                    html: `<p>Successfully registered for ${event.event_title} event.</p>`,
+                  };
+                  // Send the email
+                  transporter.sendMail(message)
+                  .then((info) => {
+                    console.log(info);
+                    return res.status(201).json({
+                      msg: "Confirmation email sent successfully",
+                      info: info.messageId,
+                      preview: nodemailer.getTestMessageUrl(info),
+                    });
+                  })
+                  .catch((error) => {
+                    console.error('Error sending email:', error);
+                    return res.status(500).json({ error: "Error sending email" });
+                  });
+                })
+                .catch((error) => {
+                  console.error('Error finding event:', error);
+                  return res.status(500).json({ error: "Error finding event" });
+                });})
+              }
+              
+                
+          //     )
+          //     // Create a transporter using Ethereal SMTP settings
+          //     let transporter = nodemailer.createTransport(config)
+          //     // Compose the email message codegather101@gmail.com
+          //     const message = {
+          //         from: "codegather101@gmail.com",
+          //         to: "bemekog903@tiuas.com",
+          //         subject: "Event Registration Confirmation",
+          //         html: `<p>Successfully registered for ${event.event_title} event.</p>`,
+          //     };
+          //     // Send the email
+          //     transporter.sendMail(message)
+          //         .then((info) => {
+          //             console.log(info);
+          //             return res.status(201).json({
+          //                 msg: "Confirmation email sent successfully",
+          //                 info: info.messageId,
+          //                 preview: nodemailer.getTestMessageUrl(info),
+          //             });
+          //         })
+          //         .catch((error) => {
+          //             console.error('Error sending email:', error);
+          //             return res.status(500).json({ error: "Error sending email" });
+          //         });
+          // })
+          // .catch((error) => {
+          //     console.error('Error finding event:', error);
+          //     return res.status(500).json({ error: "Error finding event" });
+          // });}
+//   })
+//   .catch((error) => {
+//       console.error('Error creating test account:', error);
+//       return res.status(500).json({ error: "Error creating test account" });
+//   });
+// };
+
+
+
+export { getEvents, getEventById, postEvent, deleteEventById, updateEvent, postConfirmationEmail };

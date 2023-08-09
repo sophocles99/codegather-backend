@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { getEvents, getEventById, postEvent, deleteEventById, updateEvent } from "../controllers/events.controller.mjs";
+import { getEvents, getEventById, postEvent, deleteEventById, updateEvent, postConfirmationEmail } from "../controllers/events.controller.mjs";
 
 const eventRouter:Router = Router();
 
@@ -8,4 +8,5 @@ eventRouter.get("/:id", getEventById);
 eventRouter.post("/", postEvent);
 eventRouter.delete("/:id", deleteEventById);
 eventRouter.patch("/:event_id", updateEvent);
+eventRouter.post("/:id/signup", postConfirmationEmail)
 export {eventRouter}

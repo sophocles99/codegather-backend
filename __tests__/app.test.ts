@@ -2,7 +2,7 @@ import request from "supertest";
 import app from "../dist/app.mjs";
 import db from "../dist/db/connection.mjs";
 import sampleIds from "../dist/db/seed/sampleIds.js";
-import endpointsList from "../dist/endpointsList.mjs";
+import endpointsDetails from "../dist/db/data/endpointsDetails.mjs";
 
 const { sampleUserId, sampleProfileId, sampleEventId } = sampleIds;
 
@@ -19,7 +19,7 @@ describe("GET /api", () => {
         const { success, msg, endpoints } = body;
         expect(success).toEqual(true);
         expect(msg).toEqual("List of endpoints");
-        expect(endpoints).toEqual(endpointsList);
+        expect(endpoints).toEqual(endpointsDetails);
       });
   });
 });
@@ -345,3 +345,22 @@ describe("PATCH /api/profiles/:id", () => {
       });
   });
 });
+describe("POST /api/events/:id/signup", () => {
+  test("201: for successfully sending an email", () => {
+
+    
+    return request(app)
+    .post(`/api/events/${sampleEventId}/signup`)
+      
+      .expect(201)
+      .then(({ body }) => {
+        // const { success, msg, user_id, profile_id } = body;
+        // expect(success).toEqual(true);
+        // expect(msg).toEqual("New user and profile created");
+        // expect(user_id).toEqual(expect.any(String));
+        // expect(profile_id).toEqual(expect.any(String));
+        console.log(body)
+        expect(body.msg).toEqual('Confirmation email sent successfully')
+      });
+  });
+})
