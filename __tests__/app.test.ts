@@ -194,7 +194,6 @@ describe("PATCH /api/users/:id", () => {
 });
 
 describe("GET /api/events", () => {
-  //Events testing...
   test("200: GET all events.", () => {
     return request(app)
       .get("/api/events")
@@ -202,7 +201,7 @@ describe("GET /api/events", () => {
       .then(({ body }) => {
         body.forEach((event) => {
           expect(event).toHaveProperty("_id", expect.any(String));
-          expect(event).toHaveProperty("user_id", expect.any(String));
+          expect(event).toHaveProperty("profile_id", expect.any(String));
           expect(event).toHaveProperty("event_title", expect.any(String));
           expect(event).toHaveProperty("image", expect.any(String));
           expect(event.location).toMatchObject({
@@ -229,7 +228,7 @@ describe("GET /api/events/:event_id", () => {
       .then(({ body }) => {
         const { event } = body;
         expect(event).toHaveProperty("_id", expect.any(String));
-        expect(event).toHaveProperty("user_id", expect.any(String));
+        expect(event).toHaveProperty("profile_id", expect.any(String));
         expect(event).toHaveProperty("event_title", expect.any(String));
         expect(event).toHaveProperty("image", expect.any(String));
         expect(event.location).toMatchObject({
@@ -262,7 +261,7 @@ describe("GET /api/events?topic=Innovation", () => {
       .then(({ body }) => {
         body.forEach((event) => {
           expect(event).toHaveProperty("_id", expect.any(String));
-          expect(event).toHaveProperty("user_id", expect.any(String));
+          expect(event).toHaveProperty("profile_id", expect.any(String));
           expect(event).toHaveProperty("event_title", expect.any(String));
           expect(event).toHaveProperty("image", expect.any(String));
           expect(event.location).toMatchObject({

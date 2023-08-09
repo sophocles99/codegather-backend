@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import { UserModel } from "./users.model.mjs";
+import { ProfileModel } from "./profiles.model.mjs";
 import { IEvent } from "../../types/interfaces.js";
 
 const LocationSchema = new Schema({
@@ -8,7 +9,7 @@ const LocationSchema = new Schema({
 });
 
 const eventSchema = new Schema<IEvent>({
-  user_id: { type: Schema.ObjectId, ref: UserModel, required: true },
+  profile_id: { type: Schema.ObjectId, ref: ProfileModel, required: true },
   event_title: { type: String, required: true },
   date_time: { type: Date, required: true },
   location: { type: LocationSchema, required: true },

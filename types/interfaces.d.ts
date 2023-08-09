@@ -19,7 +19,7 @@ export interface IProfile {
 }
 
 export interface IEvent {
-  user_id?: Types.ObjectId;
+  profile_id?: Types.ObjectId;
   event_title: string;
   image: string;
   location: { lat: number; long: number };
