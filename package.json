@@ -9,6 +9,7 @@
     "build": "npx tsc",
     "dev": "npx tsc -w & nodemon dist/listen.mjs",
     "seed": "node dist/db/seed/seed.mjs",
+    "seed-prod": "NODE_ENV=production npm run seed",
     "start": "node dist/listen.mjs"
   },
   "keywords": [],
