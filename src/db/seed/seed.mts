@@ -72,7 +72,7 @@ const seed = () => {
       const modifiedEvents = eventsData.map((event) => {
         const newEvent: IEvent = { ...event };
         const profileIdIndex = Math.floor(Math.random() * newProfiles.length);
-        newEvent.profile_id = newProfiles[profileIdIndex]._id;
+        newEvent.profile = newProfiles[profileIdIndex]._id;
         return newEvent;
       });
       return EventModel.insertMany(modifiedEvents);

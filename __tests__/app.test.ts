@@ -201,7 +201,6 @@ describe("GET /api/events", () => {
       .then(({ body }) => {
         body.forEach((event) => {
           expect(event).toHaveProperty("_id", expect.any(String));
-          expect(event).toHaveProperty("profile_id", expect.any(String));
           expect(event).toHaveProperty("event_title", expect.any(String));
           expect(event).toHaveProperty("image", expect.any(String));
           expect(event.location).toMatchObject({
@@ -213,8 +212,10 @@ describe("GET /api/events", () => {
           expect(event).toHaveProperty("topics", expect.any(Array));
           expect(event).toHaveProperty("description", expect.any(String));
           expect(event).toHaveProperty("size_limit", expect.any(Number));
-          expect(body).toHaveLength(20);
+          const { profile } = event;
+          expect(profile).toHaveProperty("username", expect.any(String));
         });
+        expect(body).toHaveLength(20);
       });
   });
 });
@@ -228,7 +229,6 @@ describe("GET /api/events/:event_id", () => {
       .then(({ body }) => {
         const { event } = body;
         expect(event).toHaveProperty("_id", expect.any(String));
-        expect(event).toHaveProperty("profile_id", expect.any(String));
         expect(event).toHaveProperty("event_title", expect.any(String));
         expect(event).toHaveProperty("image", expect.any(String));
         expect(event.location).toMatchObject({
@@ -240,6 +240,8 @@ describe("GET /api/events/:event_id", () => {
         expect(event).toHaveProperty("topics", expect.any(Array));
         expect(event).toHaveProperty("description", expect.any(String));
         expect(event).toHaveProperty("size_limit", expect.any(Number));
+        const { profile } = event;
+        expect(profile).toHaveProperty("username", expect.any(String));
       });
   });
   test("404: responds with an error message if passed an invalid ID.", () => {
@@ -261,7 +263,6 @@ describe("GET /api/events?topic=Innovation", () => {
       .then(({ body }) => {
         body.forEach((event) => {
           expect(event).toHaveProperty("_id", expect.any(String));
-          expect(event).toHaveProperty("profile_id", expect.any(String));
           expect(event).toHaveProperty("event_title", expect.any(String));
           expect(event).toHaveProperty("image", expect.any(String));
           expect(event.location).toMatchObject({
@@ -273,6 +274,8 @@ describe("GET /api/events?topic=Innovation", () => {
           expect(event).toHaveProperty("topics", expect.any(Array));
           expect(event).toHaveProperty("description", expect.any(String));
           expect(event).toHaveProperty("size_limit", expect.any(Number));
+          const { profile } = event;
+          expect(profile).toHaveProperty("username", expect.any(String));
         });
       });
   });
@@ -389,10 +392,10 @@ describe("PATCH /api/:event_id", () => {
 describe("POST /api/events/:id/signup", () => {
   test("201: for successfully sending an email", () => {
     return request(app)
-    .post(`/api/events/${sampleEventId}/signup`)    
+      .post(`/api/events/${sampleEventId}/signup`)
       .expect(201)
       .then(({ body }) => {
-        expect(body.msg).toEqual('Confirmation email sent successfully')
+        expect(body.msg).toEqual("Confirmation email sent successfully");
       });
   });
-})
+});

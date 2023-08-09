@@ -1,13 +1,13 @@
+import nodemailer from "nodemailer";
 import { Request, Response } from "express";
-import { EventModel } from "../models/events.model.mjs";
-import { ProfileModel } from "../models/profiles.model.mjs";
-import * as nodemailer from "nodemailer";
 import { UserModel } from "../models/users.model.mjs";
-// import { EMAIL, PASSWORD } from '../env.js';
+import { ProfileModel } from "../models/profiles.model.mjs";
+import { EventModel } from "../models/events.model.mjs";
 
 const getEvents = (req: Request, res: Response) => {
   const topic: any = req.query.topic;
   EventModel.find()
+    .populate("profile")
     .then((events) => {
       if (topic) {
         const filteredEvents = events.filter((event) =>
@@ -27,6 +27,7 @@ const getEvents = (req: Request, res: Response) => {
 const getEventById = (req: Request, res: Response) => {
   const { id } = req.params;
   EventModel.findById(id)
+    .populate("profile")
     .then((event) => {
       res.status(200).send({ event });
     })
@@ -115,7 +116,7 @@ const postConfirmationEmail = async (req: Request, res: Response) => {
     if (!event) {
       return res.status(404).json({ error: "Event not found" });
     }
-    ProfileModel.findById(event.profile_id)
+    ProfileModel.findById(event.profile)
       .then((profile) => {
         return UserModel.findById(profile.user_id);
       })
