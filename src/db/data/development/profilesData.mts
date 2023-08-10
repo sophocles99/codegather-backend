@@ -9,6 +9,7 @@ export default [
     bio: "Passionate JavaScript developer with a love for problem-solving. Enjoys playing guitar and hiking in spare time.",
     coding_languages: ["JavaScript"],
     interests: "Loves playing guitar, hiking, and reading sci-fi novels.",
+    social_media: ["LinkedIn", "Twitter"],
   },
   {
     first_name: "Nomi",
@@ -20,6 +21,7 @@ export default [
     bio: "Coder with a passion for Python and Java. Enjoys painting and exploring new cuisines.",
     coding_languages: ["Python", "Java"],
     interests: "Enjoys painting, cooking, and trying out new cuisines.",
+    social_media: ["Facebook", "Instagram"],
   },
   {
     first_name: "Merna",
@@ -31,6 +33,7 @@ export default [
     bio: "Passionate C++ developer, curious about the latest programming trends. Enjoys photography and fitness.",
     coding_languages: ["C++"],
     interests: "Passionate about photography and loves staying fit.",
+    social_media: ["Twitter", "LinkedIn"],
   },
   {
     first_name: "Robyn",
@@ -44,6 +47,7 @@ export default [
     coding_languages: ["Rust", "Go"],
     interests:
       "Enjoys painting, attending music festivals, and exploring nature.",
+    social_media: ["Instagram"],
   },
   {
     first_name: "Mischa",
@@ -55,6 +59,7 @@ export default [
     bio: "Developer with a passion for functional programming. Enthusiastic about Haskell, Scala, and TypeScript. Enjoys cooking and gaming.",
     coding_languages: ["Haskell", "Scala", "TypeScript"],
     interests: "Loves cooking and gaming in free time.",
+    social_media: ["Twitter", "LinkedIn", "Facebook"],
   },
   {
     first_name: "Vinson",
@@ -67,6 +72,7 @@ export default [
     coding_languages: ["Ruby", "PHP"],
     interests:
       "Enjoys playing board games and exploring new travel destinations.",
+    social_media: ["LinkedIn"],
   },
   {
     first_name: "Eberto",
@@ -78,6 +84,7 @@ export default [
     bio: "Developer with a passion for mobile app development. Loves building apps with Swift, Kotlin, and Objective-C. Enjoys playing football and writing blogs.",
     coding_languages: ["Swift", "Kotlin", "Objective-C"],
     interests: "Enjoys playing football and writing tech blogs.",
+    social_media: ["Twitter", "Instagram"],
   },
   {
     first_name: "Yvor",
@@ -89,6 +96,7 @@ export default [
     bio: "Developer with a passion for Perl and Bash scripting. Enjoys automating tasks and solving problems. Loves reading books and playing chess.",
     coding_languages: ["Perl", "Bash"],
     interests: "Loves reading books and playing chess in leisure time.",
+    social_media: ["LinkedIn", "Facebook"],
   },
   {
     first_name: "Mellisa",
@@ -100,6 +108,7 @@ export default [
     bio: "Developer with a passion for web development. Loves creating interactive websites using JavaScript, HTML, and CSS. Enjoys sketching and cycling.",
     coding_languages: ["JavaScript", "HTML", "CSS"],
     interests: "Enjoys sketching and cycling in spare time.",
+    social_media: ["Instagram"],
   },
   {
     first_name: "Lillian",
@@ -111,6 +120,7 @@ export default [
     bio: "Developer with a passion for Java and C#. Enjoys creating elegant and efficient applications. Loves gardening and playing piano.",
     coding_languages: ["Java", "C#"],
     interests: "Loves gardening and playing piano in free time.",
+    social_media: ["Twitter", "LinkedIn"],
   },
   {
     first_name: "Ariel",
@@ -122,6 +132,7 @@ export default [
     bio: "Enthusiastic Python, Java, and C++ developer. Loves exploring new technologies and coding projects. Enjoys watching sci-fi movies and playing basketball.",
     coding_languages: ["Python", "Java", "C++"],
     interests: "Enjoys watching sci-fi movies and playing basketball.",
+    social_media: ["Facebook", "Instagram"],
   },
   {
     first_name: "Samir",
@@ -134,6 +145,7 @@ export default [
     coding_languages: ["JavaScript", "TypeScript"],
     interests:
       "Enjoys playing cricket and exploring various painting techniques.",
+    social_media: ["LinkedIn"],
   },
   {
     first_name: "Jasmine",
@@ -145,6 +157,7 @@ export default [
     bio: "Developer with a passion for creative web development. Loves building interactive websites with Ruby, HTML, and CSS. Enjoys dancing and volunteering.",
     coding_languages: ["Ruby", "HTML", "CSS"],
     interests: "Enjoys dancing and volunteering in free time.",
+    social_media: ["Twitter", "Instagram"],
   },
   {
     first_name: "Max",
@@ -156,6 +169,7 @@ export default [
     bio: "Developer with a passion for mobile app development. Loves creating immersive games using C++, Python, and Ruby. Enjoys playing guitar and hiking.",
     coding_languages: ["C++", "Python", "Ruby"],
     interests: "Enjoys playing guitar and going on hiking adventures.",
+    social_media: ["Facebook", "LinkedIn"],
   },
   {
     first_name: "Olivia",
@@ -168,6 +182,7 @@ export default [
     coding_languages: ["Java", "Python", "C#"],
     interests:
       "Enjoys playing piano and experimenting with new cooking recipes.",
+    social_media: ["Instagram"],
   },
   {
     first_name: "Khaled",
@@ -180,6 +195,7 @@ export default [
     coding_languages: ["JavaScript", "PHP", "React"],
     interests:
       "Enjoys playing video games and going on mountain biking adventures.",
+    social_media: ["Facebook"],
   },
   {
     first_name: "Emily",
@@ -192,6 +208,7 @@ export default [
     coding_languages: ["Python", "JavaScript", "Java"],
     interests:
       "Enjoys playing the piano and reading fantasy novels in leisure time.",
+    social_media: ["Twitter"],
   },
   {
     first_name: "Daniel",
@@ -203,6 +220,7 @@ export default [
     bio: "Developer with a passion for backend development. Enjoys designing efficient and scalable databases using Java, C#, and SQL. Enjoys playing basketball and cooking.",
     coding_languages: ["Java", "C#", "SQL"],
     interests: "Enjoys playing basketball and trying out new cooking recipes.",
+    social_media: ["Facebook", "LinkedIn"],
   },
   {
     first_name: "Sophie",
@@ -215,6 +233,7 @@ export default [
     coding_languages: ["HTML", "CSS", "JavaScript"],
     interests:
       "Enjoys playing the violin and going on beach walks in free time.",
+    social_media: ["Twitter", "Instagram"],
   },
   {
     first_name: "Connor",
@@ -227,5 +246,6 @@ export default [
     coding_languages: ["Swift", "Kotlin", "Java"],
     interests:
       "Enjoys playing football and experimenting with new cooking recipes.",
+    social_media: ["Facebook", "LinkedIn"],
   },
 ];

@@ -17,6 +17,7 @@ const createUser = (req: Request, res: Response) => {
     bio,
     coding_languages,
     interests,
+    social_media,
   } = user;
   UserModel.findOne({ email })
     .then((user) => {
@@ -41,6 +42,7 @@ const createUser = (req: Request, res: Response) => {
         bio,
         coding_languages,
         interests,
+        social_media,
       };
       UserModel.create(newUser)
         .then((data: IUser) => {

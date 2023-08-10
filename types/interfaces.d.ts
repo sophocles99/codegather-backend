@@ -15,6 +15,7 @@ export interface IProfile {
   bio: string;
   coding_languages: string[];
   interests: string;
+  social_media: string[];
   host_rating?: number;
 }
 
