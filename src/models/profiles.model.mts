@@ -13,6 +13,7 @@ const profileSchema = new Schema<IProfile>({
   bio: { type: String, required: false },
   coding_languages: [{ type: String, required: false }],
   interests: { type: String, required: false },
+  social_media: [{ type: String, required: false }],
   host_rating: { type: Number, default: null },
 });
 
