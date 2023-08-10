@@ -391,8 +391,12 @@ describe("PATCH /api/:event_id", () => {
 
 describe("POST /api/events/:id/signup", () => {
   test("201: for successfully sending an email", () => {
+    const test = {
+profileId: sampleProfileId
+    }
     return request(app)
       .post(`/api/events/${sampleEventId}/signup`)
+      .send({test})
       .expect(201)
       .then(({ body }) => {
         expect(body.msg).toEqual("Confirmation email sent successfully");

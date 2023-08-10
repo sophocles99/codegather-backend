@@ -104,6 +104,7 @@ const updateEvent = (req: Request, res: Response) => {
 
 const postConfirmationEmail = async (req: Request, res: Response) => {
   const { id } = req.params;
+  const {profileId} = req.body.test
   let config = {
     service: "gmail",
     auth: {
@@ -116,7 +117,7 @@ const postConfirmationEmail = async (req: Request, res: Response) => {
     if (!event) {
       return res.status(404).json({ error: "Event not found" });
     }
-    ProfileModel.findById(event.profile)
+    ProfileModel.findById(profileId)
       .then((profile) => {
         return UserModel.findById(profile.user_id);
       })
